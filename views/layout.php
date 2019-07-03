@@ -4,8 +4,7 @@
 		<base href="/localhost" />
 		<meta charset="UTF-8" />
 		<title><?= $title ?></title>
-		<meta name="description" content="<?= $description ?>" />
-		<link rel="stylesheet" href="style.css" type="text/css"/>
+		<link rel="stylesheet" href="/public/style.css" type="text/css"/>
 	</head>
 
 	<body>

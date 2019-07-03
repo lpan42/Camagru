@@ -1,25 +1,26 @@
 <?php
 class UserManager
 {
-    public function computeHash($password)
+    public function passwordHash($password)
     {
         return password_hash($password, PASSWORD_DEFAULT);
     }
 
     public function register($email, $username, $password, $password_repeat)
     {
-        if ($password != $passwordRepeat)
-            throw new UserException('Password mismatch.');
+        if ($password != $password_repeat){
+               throw new UserException('Password mismatch.');
+        }
         $user = array(
             'email' => $email,
             'username' => $username,
-            'password' => $this->computeHash($password),
+            'password' => $this->passwordHash($password),
         );
         try
         {
             Db::insert('users', $user);
         }
-        catch (PDOException $ex)
+        catch (PDOException $e)
         {
             throw new UserException('This username/email has already been taken.');
         }
@@ -28,11 +29,11 @@ class UserManager
     public function login($email, $password)
     {
         $user = Db::queryOne('
-            SELECT id_user, email, username, password, email_prefer
+            SELECT id_user, email, username, password, email_prefer, admin
             FROM users
-            WHERE email = ?', array($email));
+            WHERE email = ?;', array($email));
         if (!$user || !password_verify($password, $user['password']))
-            throw new UserException('Invalid username or password.');
+            throw new UserException('Invalid email or password.');
         $_SESSION['email'] = $email;
         $_SESSION['username'] = $user['username'];
     }

@@ -1,4 +1,4 @@
-<h1>Log in to your account</h1>
+<h1>Login to your account</h1>
 
 <form method="post">
     Email<br />

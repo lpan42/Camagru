@@ -8,17 +8,17 @@ date_default_timezone_set('UTC');
 function autoloadFunction($class)
 {
     //echo $class;
-    if (preg_match('Camagru/Controller$/', $class)){
-        require("Camagru/controllers/" . $class . ".php");
+    if (preg_match('/Controller$/', $class)){
+        require(__DIR__."/controllers/" . $class . ".php");
     }
     else{   
-       require("Camagru/models/" . $class . ".php");
+       require(__DIR__."/models/" . $class . ".php");
     }
 }
 spl_autoload_register("autoloadFunction");
 
 //echo $DB_DSN;
-//Db::connect($DB_DSN, $DB_USER, $DB_PASSWORD);
+Db::connect($DB_DSN, $DB_USER, $DB_PASSWORD);
 
 $router = new RouterController();
 $router->process(array($_SERVER['REQUEST_URI']));

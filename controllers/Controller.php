@@ -3,7 +3,7 @@ abstract class Controller //the parent class for all controllers
 {
     protected $data = array(); //be used to store data retrieved from models. will be passed to a view 
     protected $view = "";
-    protected $head = array('title' => '');
+    protected $head = "";
     
     abstract function process($args);
     
@@ -13,7 +13,7 @@ abstract class Controller //the parent class for all controllers
         {
             extract($this->data);//$this->data['variable'] = 'value';
             extract($this->data, EXTR_PREFIX_ALL, "");
-            require("Camagru/views/" . $this->view . ".php");
+            require("views/" . $this->view . ".php");
         }
     }
 
