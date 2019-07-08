@@ -15,12 +15,17 @@
 			<p class="message"><?= $message ?></p>
 		<?php endforeach ?>
 
-		<a href="Login">Login</a>
-		<a href="Register">Register</a>
-
-		<article>
+		<?php if(!$_SESSION['username']):?>
+			<a href="Login">Login</a>
+			<a href="Register">Register</a>
+		<?php elseif($_SESSION['username']):?>
+			Welcome, <?=$_SESSION['username']?><br/>
+			<a >My account</a><br/>
+			<a href="Logout">Logout</a>
+		<?php endif?>
+		<p>
 			<?php $this->controller->renderView();?>
-		</article>
+		</p>
 
 		<footer>
 			<hr />

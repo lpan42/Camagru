@@ -1,8 +1,7 @@
 <h1>Login to your account</h1>
-
 <form method="post">
-    Email<br />
-    <input type="text" name="email" /><br />
+    Login<br />
+    <input type="text" name="login" /><br />
     Password<br />
     <input type="password" name="password" /><br />
     <input type="submit" value="Login" />

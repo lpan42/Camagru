@@ -11,6 +11,9 @@ try{
         `email` VARCHAR(30) NOT NULL UNIQUE,
         `username` VARCHAR(15) NOT NULL UNIQUE,
         `password` VARCHAR(255) NOT NULL,
+        `hash_active` VARCHAR(255) UNIQUE,
+        `hash_pwd` VARCHAR(255) UNIQUE,
+        `active` BOOLEAN DEFAULT FALSE,
         `email_prefer` BOOLEAN DEFAULT TRUE,
         `admin` BOOLEAN DEFAULT FALSE
     );";

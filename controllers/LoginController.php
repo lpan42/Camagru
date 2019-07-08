@@ -9,9 +9,9 @@ class LoginController extends Controller
         {
             try
             {
-                $userManager->login($_POST['email'], $_POST['password']);
+                $userManager->login($_POST['login'], $_POST['password']);
                 $this->addMessage('You were successfully logged in.');
-               // $this->redirect('login');
+                $this->redirect('gallery');
             }
             catch (UserException $ex)
             {

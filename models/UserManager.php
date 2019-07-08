@@ -15,6 +15,7 @@ class UserManager
             'email' => $email,
             'username' => $username,
             'password' => $this->passwordHash($password),
+            'hash_active' => hash('whirlpool', rand())
         );
         try
         {
@@ -26,21 +27,36 @@ class UserManager
         }
     }
 
-    public function login($email, $password)
+    public function login($login, $password)
     {
-        $user = Db::queryOne('
+        $email = Db::queryOne('
             SELECT id_user, email, username, password, email_prefer, admin
             FROM users
-            WHERE email = ?;', array($email));
-        if (!$user || !password_verify($password, $user['password']))
-            throw new UserException('Invalid email or password.');
-        $_SESSION['email'] = $email;
-        $_SESSION['username'] = $user['username'];
+            WHERE email = ?;', array($login));
+        if($email)//if the login use email
+        {
+            if (!password_verify($password, $email['password']))
+            	throw new UserException('Invalid email or password.');
+            $_SESSION['email'] = $email['email'];
+            $_SESSION['username'] = $email['username'];
+        }
+        else if(!$email)//if the login use username
+        {
+            $username = Db::queryOne('
+                SELECT id_user, email, username, password, email_prefer, admin
+                FROM users
+                WHERE username = ?;', array($login));
+            if (!$username || !password_verify($password, $username['password']))
+            	throw new UserException('Invalid username or password.');
+            $_SESSION['email'] = $username['email'];
+            $_SESSION['username'] = $username['username'];
+        }
     }
 
-    public function logoff()
+    public function logout()
     {
-        unset($_SESSION['user']);
+        unset($_SESSION['email']);
+        unset($_SESSION['username']);
     }
 
     public function getUsername()
