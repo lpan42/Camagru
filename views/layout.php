@@ -20,7 +20,13 @@
 			<a href="Register">Register</a>
 		<?php elseif($_SESSION['username']):?>
 			Welcome, <?=$_SESSION['username']?><br/>
-			<a >My account</a><br/>
+			<div>
+				<button>My account</button>
+				<div>
+					<a href="modifpwd">Change Password</a>
+					<a href="#">Email Preference</a>
+				</div>
+			</div> 
 			<a href="Logout">Logout</a>
 		<?php endif?>
 		<p>

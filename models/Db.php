@@ -40,6 +40,11 @@ class Db
 	   return self::query("INSERT INTO `$table` (`".implode('`, `', array_keys($args))."`) VALUES (".str_repeat('?,', sizeof($args)-1)."?)",
 		array_values($args));
 	}
-	
+    
+    public static function update($table, $values = array(), $condition, $args = array()) //  Db::update('article', $article, 'WHERE article_id = ?', array($id));
+	{
+		return self::query("UPDATE `$table` SET `".implode('` = ?, `', array_keys($values))."` = ? " . $condition,
+			array_merge(array_values($values), $args));
+	}
 }
 ?>

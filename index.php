@@ -23,4 +23,5 @@ Db::connect($DB_DSN, $DB_USER, $DB_PASSWORD);
 $router = new RouterController();
 $router->process(array($_SERVER['REQUEST_URI']));
 $router->renderView();
+//session_unset();
 ?>  

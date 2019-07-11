@@ -5,6 +5,17 @@ class LoginController extends Controller
     {
         $userManager = new UserManager;
         $this->head = 'Login';
+        if($args[0] && $args[1])
+        {
+            try{
+                $userManager->active($args[0], $args[1]);
+                $this->addMessage('your account has been successfully actived, you may login now.');
+            }
+            catch (UserException $ex)
+            {
+                $this->addMessage($ex->getMessage());
+            }
+        }
         if ($_POST)
         {
             try
