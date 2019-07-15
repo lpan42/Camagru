@@ -24,7 +24,7 @@
 				<button>My account</button>
 				<div>
 					<a href="modifpwd">Change Password</a>
-					<a href="#">Email Preference</a>
+					<a href="modifemail">Email Preference</a>
 				</div>
 			</div> 
 			<a href="Logout">Logout</a>

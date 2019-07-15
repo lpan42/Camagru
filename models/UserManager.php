@@ -88,19 +88,19 @@ class UserManager
 
     public function modif_pwd($old_pwd, $new_pwd, $new_pwd_repeat)
     {
-        print_r($old_pwd);
-        print_r($$new_pwd);
-        print_r($new_pwd_repeat);
+        // print_r($old_pwd);
+        // print_r($$new_pwd);
+        // print_r($new_pwd_repeat);
         if ($new_pwd != $new_pwd_repeat){
             throw new UserException('New password mismatch.');
         }
         $username = $this->getUsername();
-        print_r($username);
+        // print_r($username);
         $ver_old = Db::queryOne('
             SELECT password
             FROM users
             WHERE username = ?;', array($username));
-        print_r($ver_old['password']);
+        // print_r($ver_old['password']);
         if (!password_verify($old_pwd, $ver_old['password']))
             throw new UserException('Old password is wrong.');
         else{
@@ -113,6 +113,33 @@ class UserManager
                echo $e->getMessage();
            }
         }
+    }
+
+    public function getCurrentPrefer($username)
+    {
+		try{
+			$current = Db::queryOne('
+            SELECT email_prefer
+            FROM users
+			WHERE username = ?;', array($username));
+			return ($current);
+		}
+		catch (PDOException $e)
+		{
+			echo $e->getMessage();
+		}
+    }
+
+    public function modif_EmailPrefer($username, $changeto)
+    {
+		try{
+			$new_prefer = array('email_prefer' => $changeto);
+			Db::update('users', $new_prefer, 'WHERE username = ?', array($username));
+		}
+		catch (PDOException $e)
+		{
+			echo $e->getMessage();
+		}
     }
 
     public function logout()

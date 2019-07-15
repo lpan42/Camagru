@@ -3,3 +3,8 @@
     background: #DBE8F8;
     padding: 3px;
 }
+
+#camera {
+    width: 100%;
+    height: 350px;
+  }

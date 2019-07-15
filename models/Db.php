@@ -27,6 +27,14 @@ class Db
         return $result->fetch();
     }
 
+    //return an array of rows that match a given query
+    public static function queryAll($query, $args = array())
+    {
+        $result = self::$connection->prepare($query);
+        $result->execute($args);
+        return $result->fetchAll();
+    }
+    
     // Executes a query and returns the number of affected rows
 	public static function query($query, $args = array())
 	{
