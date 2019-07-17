@@ -44,13 +44,13 @@ abstract class Controller //the parent class for all controllers
             return array();
     }
 
-    public function authUser($admin = false)
+    public function authUser()
     {
         $userManager = new UserManager();
-        $user = $userManager->getUser();
-        if (!$user || ($admin && !$user['admin']))
+        $user = $userManager->getUsername();
+        if (!$user)
         {
-            $this->addMessage('You are not authorized to complete this action.');
+            $this->addMessage('You need to login first.');
             $this->redirect('login');
         }
     }
