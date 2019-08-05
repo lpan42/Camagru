@@ -4,7 +4,7 @@
         public function process($args)
         {
             $userManager = new UserManager;
-            $this->head = 'Logout';
+            $this->head['title'] = 'Logout';
             if ($_SESSION['email'])
             {
                 try

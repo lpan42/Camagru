@@ -118,10 +118,10 @@ class UserManager
     public function getCurrentPrefer($username)
     {
 		try{
-			$current = Db::queryOne('
-            SELECT email_prefer
-            FROM users
-			WHERE username = ?;', array($username));
+			$current = Db::queryOne(
+                'SELECT email_prefer
+                FROM users
+                WHERE username = ?;', array($username));
 			return ($current);
 		}
 		catch (PDOException $e)

@@ -5,11 +5,14 @@
 		<meta charset="UTF-8" />
 		<title><?= $title ?></title>
 		<link rel="stylesheet" href="/public/style.css" type="text/css"/>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="jpeg_camera/jpeg_camera_with_dependencies.min.js" type="text/javascript"></script>
+
 	</head>
 
 	<body>
 		<header>
-			<h1>Camagru</h1>
+			<h1><a href="gallery">Camagru</h1>
 		</header>
 		<?php foreach ($messages as $message) : ?>
 			<p class="message"><?= $message ?></p>
@@ -23,8 +26,8 @@
 			<div>
 				<button>My account</button>
 				<div>
-					<a href="modifpwd">Change Password</a>
-					<a href="modifemail">Email Preference</a>
+					<a href="modify/password">Change Password</a>
+					<a href="modify/email-prefer">Email Preference</a>
 				</div>
 			</div> 
 			<a href="Logout">Logout</a>

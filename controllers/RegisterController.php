@@ -4,7 +4,7 @@ class RegisterController extends Controller
     public function process($args)
     {
         // HTML head
-        $this->head = 'Register';
+        $this->head['title'] = 'Register';
         if ($_POST)
         {
             try

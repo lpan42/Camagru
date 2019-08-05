@@ -11,7 +11,7 @@ abstract class Controller //the parent class for all controllers
     {
         if ($this->view)
         {
-            extract($this->data);//$this->data['variable'] = 'value';
+            extract($this->data);
             extract($this->data, EXTR_PREFIX_ALL, "");
             require("views/" . $this->view . ".php");
         }
