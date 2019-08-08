@@ -2,7 +2,7 @@
 class NewpostController extends Controller
 {
     public function process($args){
-        if ($_POST['submit'] == 'Upload Image'){
+        if ($_POST['submit'] == 'Upload'){
             $this->upload_pic();
         }
         $newpost = new NewPost();
@@ -35,12 +35,12 @@ class NewpostController extends Controller
             $uploadOk = 0;
         }
         // Check file size
-        else if ($_FILES["fileToUpload"]["size"] > 500000) {
+        if ($_FILES["fileToUpload"]["size"] > 5000000) {
             $this->addMessage('File is too large.');
             $uploadOk = 0;
         }
         // Allow certain file formats
-        else if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
         && $imageFileType != "gif" ) {
             $this->addMessage('Only JPG, JPEG, PNG & GIF files are allowed.');
             $uploadOk = 0;
@@ -48,6 +48,7 @@ class NewpostController extends Controller
         // Check if $uploadOk is set to 0 by an error
         if ($uploadOk == 1) {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                $this->data['uploadedpic'] = $target_file;
                 $this->addMessage('The file has been uploaded.');
             } else {
                 $this->addMessage('An error uploading your file.');
