@@ -1,0 +1,30 @@
+.message{
+    border: 1px solid #9DC2F8;
+    background: #DBE8F8;
+    padding: 3px;
+}
+
+#camera{
+    width: 80%;
+    height: 40vh;
+} 
+
+#uploadpic{
+    height: 40vh;
+}
+
+.stickers_div{
+    float: left;
+    width:10%;
+}
+.prepics_div{
+    float: right;
+    width:10%;
+}
+.sticker{
+    width:10vw;
+}
+
+#upload_pic{
+    display:none;
+}
