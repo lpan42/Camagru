@@ -1,28 +1,59 @@
+/********** GENERAL **********/
 .message{
-    border: 1px solid #9DC2F8;
-    background: #DBE8F8;
+    border: 1px solid #9dc2f8;
+    background: yellow;
     padding: 3px;
+}
+.page-content{
+    position: relative;
+}
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;   
+}
+/********** WEBCAM **********/
+.pic_div{
+    float: left;
+    position: relative;
+    width: 80%;
+    height: 60vh;
+    border: black solid 1px;
+} 
+.stickers_div{
+    float: left;
+    position: relative;
+    width:10%;
+}
+#new-post{
+    width:100%;
+    /* position: relative; */
+}
+#uploadedpic{
+    width:100%;
+    height:100%;
+    object-fit: scale-down;
+    position:absolute;
+	z-index: 1;
+}
+.added-sticker{
+    width:10vw;
+    position:absolute;
+	z-index: 2;
 }
 
 #camera{
-    width: 80%;
-    height: 40vh;
-} 
-
-#uploadpic{
-    height: 40vh;
-}
-
-.stickers_div{
-    float: left;
-    width:10%;
+    width:100%;
+    position: absolute;
 }
 .prepics_div{
     float: right;
+    position: relative;
     width:10%;
 }
 .sticker{
-    width:10vw;
+    width:8vw;
 }
 
 #upload_pic{

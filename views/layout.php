@@ -9,6 +9,7 @@
 	</head>
 
 	<body>
+
 		<header>
 			<h1><a href="gallery">Camagru</h1>
 		</header>
@@ -29,10 +30,11 @@
 				</div>
 			</div> 
 			<a href="Logout">Logout</a>
+			<a href="newpost">New Post</a>
 		<?php endif?>
-		<p>
+		<div class="page-content">
 			<?php $this->controller->renderView();?>
-		</p>
+		</div>
 
 		<footer>
 			<hr />
