@@ -1,3 +1,5 @@
+
+
 //add sticker on top of the img
 var ii = document.getElementsByClassName("sticker");
 for (var i = 0; i < ii.length; i++) {
@@ -6,9 +8,20 @@ for (var i = 0; i < ii.length; i++) {
         var ele = document.createElement("IMG");
         ele.setAttribute("src", this.src);
         ele.setAttribute("class", "added-sticker");
-        document.getElementById("new-post").appendChild(ele); 
+        document.getElementById("div1").appendChild(ele); 
     });
 }
+
+//show different div
+$(function(){
+  $('.toggleButton').click(function(){
+
+        var target = $('#' + $(this).attr('data-target'));
+        $('.toggleDiv').not(target).hide();
+        target.show();
+  });
+});
+
 
 //webcam
 var ii = document.getElementsByClas
@@ -19,9 +32,6 @@ var constraints = { video: { facingMode: "user" }, audio: false };
         cameraTrigger = document.querySelector("#camera--trigger")
 function cameraStart()
 {
-    $("#camera").show();
-    $("#upload").hide();
-    // $(".btn").hide();
     navigator.mediaDevices
         .getUserMedia(constraints)
         .then(function(stream) {
@@ -36,25 +46,25 @@ cameraTrigger.onclick = function()
 {
     cameraSensor.width = cameraView.videoWidth;
     cameraSensor.height = cameraView.videoHeight;
-    cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
+    cameraSensor.getContext("2d").drawImage(cameraView, 0, 0, cameraSensor.width, cameraSensor.height);
     cameraOutput.src = cameraSensor.toDataURL("public/gallery");
     cameraOutput.classList.add("taken");
     track.stop();
 };
 document.getElementById("take_picture").addEventListener("click", cameraStart);
 
+
 //upload a file
 function chooseFileToUpload() 
 {
-    $("#camera").hide();
-    // $(".btn").hide();
     $("#upload_pic").toggle("slow");
     return false;
 }
 document.getElementById("upload_picture").addEventListener("click", chooseFileToUpload);
 
+
 //move stickers
-var container = document.querySelector("#new-post");
+var container = document.querySelector(".toggleDiv");
 var activeItem = null;
 
 var active = false;
