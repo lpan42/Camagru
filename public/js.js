@@ -1,4 +1,8 @@
 
+$("#btn").click(function(){
+  $("#final_pic").empty();
+});
+
 
 //add sticker on top of the img
 var ii = document.getElementsByClassName("sticker");
@@ -8,26 +12,22 @@ for (var i = 0; i < ii.length; i++) {
         var ele = document.createElement("IMG");
         ele.setAttribute("src", this.src);
         ele.setAttribute("class", "added-sticker");
-        document.getElementById("div1").appendChild(ele); 
+        document.getElementById("final_pic").appendChild(ele); 
     });
 }
 
 //show different div
-$(function(){
-  $('.toggleButton').click(function(){
-
-        var target = $('#' + $(this).attr('data-target'));
-        $('.toggleDiv').not(target).hide();
-        target.show();
-  });
+$('.toggleButton').click(function(){
+    var target = $('#' + $(this).attr('data-target'));
+    target.show();
+    $('.toggleDiv').not(target).hide();
 });
-
 
 //webcam
 var ii = document.getElementsByClas
 var constraints = { video: { facingMode: "user" }, audio: false };
     const cameraView = document.querySelector("#camera--view"),
-        cameraOutput = document.querySelector("#camera--output"),
+        // cameraOutput = document.querySelector("#output"),
         cameraSensor = document.querySelector("#camera--sensor"),
         cameraTrigger = document.querySelector("#camera--trigger")
 function cameraStart()
@@ -47,24 +47,18 @@ cameraTrigger.onclick = function()
     cameraSensor.width = cameraView.videoWidth;
     cameraSensor.height = cameraView.videoHeight;
     cameraSensor.getContext("2d").drawImage(cameraView, 0, 0, cameraSensor.width, cameraSensor.height);
-    cameraOutput.src = cameraSensor.toDataURL("public/gallery");
-    cameraOutput.classList.add("taken");
+    // create output IMG
+    var src = cameraSensor.toDataURL("public/temp");
+    var ele = document.createElement("IMG");
+        ele.setAttribute("src", src);
+        ele.setAttribute("class", "snap-pic");
+        document.getElementById("final_pic").appendChild(ele); 
     track.stop();
 };
 document.getElementById("take_picture").addEventListener("click", cameraStart);
 
-
-//upload a file
-function chooseFileToUpload() 
-{
-    $("#upload_pic").toggle("slow");
-    return false;
-}
-document.getElementById("upload_picture").addEventListener("click", chooseFileToUpload);
-
-
 //move stickers
-var container = document.querySelector(".toggleDiv");
+var container = document.querySelector("#final_pic");
 var activeItem = null;
 
 var active = false;

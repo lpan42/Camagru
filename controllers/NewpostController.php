@@ -2,6 +2,7 @@
 class NewpostController extends Controller
 {
     public function process($args){
+        $this->authUser();
         if ($_POST['submit'] == 'Upload'){
             $this->upload_pic();
         }
@@ -15,8 +16,8 @@ class NewpostController extends Controller
     }
 
     public function upload_pic(){
-        $target_dir = "public/gallery/";
-        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+        $target_dir = "public/tmp/";
+        $target_file = $target_dir.basename($_FILES["fileToUpload"]["name"]);
         $uploadOk = 0;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         // Check if image file is a actual image or fake image

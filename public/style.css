@@ -19,20 +19,34 @@ footer{
     position: relative;
     width: 80%;
     height: 40vh;
-    border: black solid 1px;
+    border: rgb(151, 127, 127) solid 1px;
 } 
+.process_post
+{
+    width:100%;
+    height:90%;
+    border: rgb(151, 127, 127) solid 1px;
+}
 
-.btn{
-    text-align: center;
-}
-.toggleButton{
-    background-color: black;
-    color: white;
-}
 .stickers_div{
     float: left;
     position: relative;
     width:10%;
+}
+
+.prepics_div{
+    float: right;
+    position: relative;
+    width:10%;
+}
+
+.btn{
+    text-align: center; 
+} 
+
+.toggleButton{
+    background-color: black;
+    color: white;
 }
 
 #uploadedpic{
@@ -42,26 +56,50 @@ footer{
     position:absolute;
 	z-index: 1;
 }
+#camera--view{
+    position:absolute;
+}
+
+#camera--trigger{
+    text-align: center;
+    vertical-align: bottom;
+    position:absolute;
+	z-index: 2;
+}
+
 .added-sticker{
     width:10vw;
     position:absolute;
 	z-index: 2;
 }
 
-
 .toggleDiv{
     width:100%;
+    height:100%;
     position: absolute;
+    z-index: 1;
 }
-.prepics_div{
-    float: right;
-    position: relative;
-    width:10%;
-}
+
 .sticker{
     width:8vw;
 }
 
-#upload_pic{
+/* .toggleDiv{
     display:none;
+}  */
+
+.final_pic{
+    width:100%; 
+    height:100%;
+}
+
+.snap-pic{
+    height:100%;
+    position: absolute;
+    z-index: 1;
+}
+
+#btn-post{
+    position: absolute;
+    z-index: 2;
 }
