@@ -29,11 +29,14 @@ class RouterController extends Controller
         	$this->controller = new $controllerClass;
 		else
 			$this->redirect('error');
+		$this->controller->parent = $this;
 		$this->controller->process($parsedUrl);
-		$this->data['title'] = $this->controller->head['title'];
-		$this->data['description'] = $this->controller->head['description'];
-		$this->data['messages'] = $this->getMessages();
-		$this->view = 'layout';
+		if ($this->empty_page == FALSE) {
+			$this->data['title'] = $this->controller->head['title'];
+			$this->data['description'] = $this->controller->head['description'];
+			$this->data['messages'] = $this->getMessages();
+			$this->view = 'layout';
+		}
 	}
 }
 ?>

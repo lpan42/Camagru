@@ -1,8 +1,3 @@
-<!-- <script>window.onload = function(){
-    $('#btn').show();
-    $('.toggleDiv').hide();
-};
-</script> -->
 
 <div class="stickers_div">stickers_div
     <?php foreach($stickers as $sticker):?>
@@ -15,24 +10,28 @@
     <?php endforeach;?>
 </div>
 <!-- <button class="toggleButton" data-target="btn">Go back</button> -->
-<div class="pic_div">pic_div
+<div class="pic_div">
     <!-- button -->
     <div class="btn" id="btn">
         <button class="toggleButton" id="upload_picture" data-target="upload_pic">Upload a Picture</button>
         <button class="toggleButton" id="take_picture" data-target="div2">Take a Picture</button>
     </div>
-    <div class="process_post">process_post
+
+    <div class="process_post">
         <!-- choose file -->
-       <input type="file" name="fileToUpload" id="fileToUpload">
+        <form class="toggleDiv" id="upload_pic" action="#" method="post" enctype="multipart/form-data">
+        <input type="file" name="fileToUpload" id="fileToUpload" />
+            <input type="button" class="toggleButton" value="Upload" id="btn_upload" data-target="final_pic">
+        </form>
         <!-- camera -->
-        <div class="toggleDiv" id="div2">div2
+        <div class="toggleDiv" id="div2">
             <video id="camera--view" autoplay playsinline></video>
             <canvas id="camera--sensor"></canvas>
             <button class="toggleButton" id="camera--trigger" data-target="final_pic">Say cheese</button>
         </div>
 
         <!-- show pic   -->
-        <div class="toggleDiv" id="final_pic">final_pic
+        <div class="toggleDiv" id="final_pic">
             <button class="btn" id="btn-post">POST</button>
             <?php if($uploadedpic):?>
                 <img id="uploadedpic" src="<?=$uploadedpic?>" alt="<?=$uploadedpic?>">

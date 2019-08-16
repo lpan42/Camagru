@@ -4,6 +4,8 @@ abstract class Controller //the parent class for all controllers
     protected $data = array(); //be used to store data retrieved from models. will be passed to a view 
     protected $view = "";
     protected $head = "";
+    protected $parent = NULL;
+    protected $empty_page = FALSE;
     
     abstract function process($args);
     

@@ -19,13 +19,13 @@ footer{
     position: relative;
     width: 80%;
     height: 40vh;
-    border: rgb(151, 127, 127) solid 1px;
+    /* border: rgb(151, 127, 127) solid 1px; */
 } 
 .process_post
 {
     width:100%;
     height:90%;
-    border: rgb(151, 127, 127) solid 1px;
+    /* border: rgb(151, 127, 127) solid 1px; */
 }
 
 .stickers_div{
