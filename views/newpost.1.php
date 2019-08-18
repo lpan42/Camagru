@@ -13,31 +13,29 @@
 <div class="pic_div">
     <!-- button -->
     <div class="btn" id="btn">
-        <button class="toggleButton" id="upload_picture" data-target="upload_pic">Upload a Picture</button>
-        <button class="toggleButton" id="take_picture" data-target="div2">Take a Picture</button>
+        <button class="toggleButton" id="upload_picture" data-target="uploaded">Upload a Picture</button>
+        <button class="toggleButton" id="take_picture" data-target="camera">Take a Picture</button>
     </div>
-
-    <div class="process_post">
-        <!-- choose file -->
-        <form class="toggleDiv" id="upload_pic" action="#" method="post" enctype="multipart/form-data">
-        <input type="file" name="fileToUpload" id="fileToUpload" />
-            <input type="button" class="toggleButton" value="Upload" id="btn_upload" data-target="final_pic">
+    <!-- choose file -->
+    <div id="form_upload">
+        <form id="upload_pic" action="#" method="post" enctype="multipart/form-data">
+            <input type="file" name="fileToUpload" id="fileToUpload" />
+            <!-- <input type="button" class="toggleButton" value="Upload" id="btn_upload" data-target="final_pic"> -->
         </form>
+    </div>
+    <div class="process_post" id="div2">
+        <div class="toggleDiv" id="uploaded"></div>
         <!-- camera -->
-        <div class="toggleDiv" id="div2">
+        <div class="toggleDiv" id="camera">
             <video id="camera--view" autoplay playsinline></video>
             <canvas id="camera--sensor"></canvas>
             <button class="toggleButton" id="camera--trigger" data-target="final_pic">Say cheese</button>
         </div>
+    </div>
 
-        <!-- show pic   -->
-        <div class="toggleDiv" id="final_pic">
-            <button class="btn" id="btn-post">POST</button>
-            <?php if($uploadedpic):?>
-                <img id="uploadedpic" src="<?=$uploadedpic?>" alt="<?=$uploadedpic?>">
-            <?php endif;?>
-          
-        </div>
+    <!-- show pic   -->
+    <div id="final_pic">
+        <button class="btn" id="btn-post">POST</button>
     </div>
 </div>
 

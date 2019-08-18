@@ -13,21 +13,7 @@ footer{
     width: 100%;
     height: 2.5rem;   
 }
-/********** WEBCAM **********/
-.pic_div{
-    float: left;
-    position: relative;
-    width: 80%;
-    height: 40vh;
-    /* border: rgb(151, 127, 127) solid 1px; */
-} 
-.process_post
-{
-    width:100%;
-    height:90%;
-    /* border: rgb(151, 127, 127) solid 1px; */
-}
-
+/********** NEWPOST  **********/
 .stickers_div{
     float: left;
     position: relative;
@@ -40,23 +26,53 @@ footer{
     width:10%;
 }
 
-.btn{
-    text-align: center; 
+.pic_div{
+    float: left;
+    position: relative;
+    width: 80%;
+    height: 40vh;
 } 
 
-.toggleButton{
-    background-color: black;
-    color: white;
+.sticker{
+    width:8vw;
 }
 
-#uploadedpic{
+.added-sticker{
+    width:10vw;
+    position:absolute;
+	z-index: 2;
+}
+
+#btn-post{
+    position: absolute;
+    display: none;
+}
+
+#uploaded-pic{
     width:100%;
     height:100%;
     object-fit: scale-down;
     position:absolute;
 	z-index: 1;
+} 
+/* 
+.process_post
+{
+    width:100%;
+    height:90%;
+    /* border: rgb(151, 127, 127) solid 1px; */
+/* } */
+/* 
+.toggleButton{
+    background-color: black;
+    color: white;
 }
-#camera--view{
+
+*/
+/* #form_upload{
+    display: none;
+} */
+/* #camera--view{
     position:absolute;
 }
 
@@ -67,11 +83,6 @@ footer{
 	z-index: 2;
 }
 
-.added-sticker{
-    width:10vw;
-    position:absolute;
-	z-index: 2;
-}
 
 .toggleDiv{
     width:100%;
@@ -80,15 +91,12 @@ footer{
     z-index: 1;
 }
 
-.sticker{
-    width:8vw;
-}
 
 /* .toggleDiv{
     display:none;
 }  */
 
-.final_pic{
+/* .final_pic{
     width:100%; 
     height:100%;
 }
@@ -99,7 +107,4 @@ footer{
     z-index: 1;
 }
 
-#btn-post{
-    position: absolute;
-    z-index: 2;
-}
+ */

@@ -30,7 +30,11 @@
 				</div>
 			</div> 
 			<a href="Logout">Logout</a>
-			<a href="newpost">New Post</a>
+			<button>New Post</button>
+				<div>
+					<a href="Upload">Upload a Picture</a>
+					<a href="Webcam">Take a Picture</a>
+				</div>
 		<?php endif?>
 		<div class="page-content">
 			<?php $this->controller->renderView();?>
