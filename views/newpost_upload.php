@@ -15,7 +15,8 @@
     </form>
 </div>
 
-<div class="pic_div" id="process_final">
+<div class="pic_div" id="process-final">
+    <div id="added-sticker-div"></div>
     <button class="btn" id="btn-post">POST</button>
 </div>
 

@@ -1,72 +1,90 @@
-
 //add sticker on top of the img
 var ii = document.getElementsByClassName("sticker");
 for (var i = 0; i < ii.length; i++) {
+	var a = 0;
     ii[i].addEventListener("click", function(){
         var ele = document.createElement("IMG");
         ele.setAttribute("src", this.src);
-        ele.setAttribute("class", "added-sticker");
-        document.getElementById("process_final").appendChild(ele); 
+				ele.setAttribute("class", "added-sticker");
+				ele.setAttribute("id", a++);
+		document.getElementById("added-sticker-div").appendChild(ele);
+    });
+}
+
+//double click to remove stickers
+var nn = document.getElementsByClassName("added-sticker");
+for (var n = 0; n < nn.length; n++) {
+    nn[n].addEventListener("dblclick", function(){
+       console.log(n);
     });
 }
 
 //move stickers
-var container = document.querySelector("#process_final");
-var activeItem = null;
-var active = false;
-container.addEventListener("touchstart", dragStart, false);
-container.addEventListener("touchend", dragEnd, false);
-container.addEventListener("touchmove", drag, false);
-container.addEventListener("mousedown", dragStart, false);
-container.addEventListener("mouseup", dragEnd, false);
-container.addEventListener("mousemove", drag, false);
+window.onload = function() {
+	document.onmousedown = startDrag;
+	document.onmouseup = stopDrag;
+	document.ondblclick = remove_sticker; 
+}
+function remove_sticker(e){
+	if (!e) {
+		var e = window.event;
+	}
+	if(e.preventDefault) {
+		e.preventDefault();
+	}
+	targ = e.target ? e.target : e.srcElement;
+	if (targ.className != 'added-sticker') {
+		return;
+	}
+	targ.remove();
+}
+function startDrag(e) {
+	// determine event object
+	if (!e) {
+		var e = window.event;
+	}
+	if(e.preventDefault) {
+		e.preventDefault();
+	}
+	// IE uses srcElement, others use target
+	targ = e.target ? e.target : e.srcElement;
+	if (targ.className != 'added-sticker') {
+		return;
+	}
+	// calculate event X, Y coordinates
+		offsetX = e.clientX;
+		offsetY = e.clientY;
+	// assign default values for top and left properties
+	if(!targ.style.left) {
+		targ.style.left='0px';
+	}
+	if (!targ.style.top) {
+		targ.style.top='0px';
+	}
+	// calculate integer values for top and left 
+	// properties
+	coordX = parseInt(targ.style.left);
+	coordY = parseInt(targ.style.top);
+	drag = true;
+	// move div element
+	document.onmousemove = dragDiv;
+	return false;
+	
+}
 
-function dragStart(e) {
-if (e.target !== e.currentTarget) {
-active = true;
-activeItem = e.target;
-if (activeItem !== null) {
-	if (!activeItem.xOffset) {
-	activeItem.xOffset = 0;
+function dragDiv(e) {
+	if (!drag) {
+		return;
 	}
-	if (!activeItem.yOffset) {
-	activeItem.yOffset = 0;
+	if (!e) {
+		var e = window.event;
 	}
-	if (e.type === "touchstart") {
-	activeItem.initialX = e.touches[0].clientX - activeItem.xOffset;
-	activeItem.initialY = e.touches[0].clientY - activeItem.yOffset;
-	} 
-	else {
-		console.log("delete");
-		activeItem.remove();
-	}
-}
-}
+	// move div element
+	targ.style.left = coordX + e.clientX - offsetX + 'px';
+	targ.style.top = coordY + e.clientY - offsetY + 'px';
+	return false;
 }
 
-function dragEnd(e) {
-if (activeItem !== null) {
-activeItem.initialX = activeItem.currentX;
-activeItem.initialY = activeItem.currentY;
-}
-active = false;
-activeItem = null;
-}
-function drag(e) {
-if (active) {
-if (e.type === "touchmove") {
-	e.preventDefault();
-	activeItem.currentX = e.touches[0].clientX - activeItem.initialX;
-	activeItem.currentY = e.touches[0].clientY - activeItem.initialY;
-} else {
-	activeItem.currentX = e.clientX - activeItem.initialX;
-	activeItem.currentY = e.clientY - activeItem.initialY;
-}
-activeItem.xOffset = activeItem.currentX;
-activeItem.yOffset = activeItem.currentY;
-setTranslate(activeItem.currentX, activeItem.currentY, activeItem);
-}
-}
-function setTranslate(xPos, yPos, el) {
-el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+function stopDrag() {
+	drag=false;
 }

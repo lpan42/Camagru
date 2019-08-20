@@ -33,6 +33,10 @@ footer{
     height: 40vh;
 } 
 
+#btn-post{
+    position: absolute;
+}
+
 .sticker{
     width:8vw;
 }
@@ -40,14 +44,14 @@ footer{
 .added-sticker{
     width:10vw;
     position:absolute;
-	z-index: 2;
+    z-index: 2;
+    cursor: move;
 }
 
-#btn-post{
-    position: absolute;
-    display: none;
+#camera--trigger{
+    position:absolute;
+	z-index: 3;
 }
-
 #uploaded-pic{
     width:100%;
     height:100%;
@@ -55,6 +59,18 @@ footer{
     position:absolute;
 	z-index: 1;
 } 
+
+#camera--sensor{
+    display: none;
+}
+
+#camera--view{
+    position:absolute;
+    z-index: 1;
+}
+#process-final{
+    border: solid black 1px;
+}
 /* 
 .process_post
 {
@@ -72,9 +88,7 @@ footer{
 /* #form_upload{
     display: none;
 } */
-/* #camera--view{
-    position:absolute;
-}
+/* 
 
 #camera--trigger{
     text-align: center;
