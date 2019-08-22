@@ -32,8 +32,8 @@
 			<a href="Logout">Logout</a>
 			<button>New Post</button>
 				<div>
-					<a class="btn" id ="btn-upload" href="Upload">Upload a Picture</a>
-					<a class="btn" id ="btn-webcam" href="Webcam">Take a Picture</a>
+					<a class="btn" id ="btn-upload" href="Newpost/Upload">Upload a Picture</a>
+					<a class="btn" id ="btn-webcam" href="Newpost/Webcam">Take a Picture</a>
 				</div>
 		<?php endif?>
 		<div class="page-content">

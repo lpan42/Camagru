@@ -1,6 +1,5 @@
 <?php
 require_once 'config/database.php';
-require_once 'public/utilities.php';
 
 session_start();
 mb_internal_encoding("UTF-8");
@@ -24,5 +23,5 @@ Db::connect($DB_DSN, $DB_USER, $DB_PASSWORD);
 $router = new RouterController();
 $router->process(array($_SERVER['REQUEST_URI']));
 $router->renderView();
-//session_unset();
+// session_unset();
 ?>  

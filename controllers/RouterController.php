@@ -33,7 +33,6 @@ class RouterController extends Controller
 		$this->controller->process($parsedUrl);
 		if ($this->empty_page == FALSE) {
 			$this->data['title'] = $this->controller->head['title'];
-			$this->data['description'] = $this->controller->head['description'];
 			$this->data['messages'] = $this->getMessages();
 			$this->view = 'layout';
 		}

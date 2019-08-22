@@ -56,5 +56,11 @@ abstract class Controller //the parent class for all controllers
             $this->redirect('login');
         }
     }
+    public function debugp($arg)
+    {
+        echo "<pre>";
+        var_dump($arg);
+        echo "</pre>";
+    }
 }
 ?>

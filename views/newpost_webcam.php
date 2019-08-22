@@ -18,7 +18,7 @@
     </div>
 </div>
 <div id="final-preview">
-    <button class="btn" id="btn-post">POST</button>
 </div>
+<button class="btn" id="btn-post">POST</button>
 <script type="text/javascript" src="/public/js/webcam.js"></script>
 <script type="text/javascript" src="/public/js/js.js"></script>
