@@ -16,16 +16,15 @@
     </form>
 </div>
 
-<div class="pic_div" id="process-final">
-    <canvas id="canvas"></canvas>
-    <div id="added-sticker-div"></div>
+<div class="pic_div" id="process_final">
+    <canvas class="canvas" id="canvas_bg"></canvas>
+    <canvas class="canvas" id="canvas_stickers"></canvas>
 </div>
 <button class="btn" id="btn-merge">MERGE</button>
 
-
-<div class="pic_div" id="final-preview">
-<button class="btn" id="btn-post">POST</button>
+<div id="final_preview">
 </div>
+<button class="btn" id="btn-post">POST</button>
 
 <script type="text/javascript" src="/public/js/upload.js"></script>
 <script type="text/javascript" src="/public/js/js.js"></script>

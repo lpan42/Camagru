@@ -56,11 +56,26 @@ abstract class Controller //the parent class for all controllers
             $this->redirect('login');
         }
     }
-    public function debugp($arg)
+
+    public function html_print($arg)
     {
         echo "<pre>";
         var_dump($arg);
         echo "</pre>";
     }
+
+    public function name_file(){
+        $username = $_SESSION['username'];
+        $name = $username.date('YmdHis').".jpg";
+        return $name;
+    }
+
+    // public function changeImagetoBase64($image){
+    //     $path = $image;
+    //     $type = pathinfo($path, PATHINFO_EXTENSION);
+    //     $data = file_get_contents($path);
+    //     $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    //     return $base64;
+    // }
 }
 ?>

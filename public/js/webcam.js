@@ -1,35 +1,30 @@
 //webcam
-window.addEventListener('load',cameraStart);
-var constraints = { video: { facingMode: "user" }, audio: false };
+window.addEventListener('load', cameraStart);
+const constraints = { video: { facingMode: "user" }, audio: false };
 const cameraView = document.querySelector("#camera--view"),
-    // cameraOutput = document.querySelector("#output"),
-    cameraSensor = document.querySelector("#camera--sensor"),
-    cameraTrigger = document.querySelector("#camera--trigger")
-function cameraStart()
-{
-navigator.mediaDevices
-    .getUserMedia(constraints)
-    .then(function(stream) {
-    track = stream.getTracks()[0];
-    cameraView.srcObject = stream;
-})
-.catch(function(error) {
-    console.error("Oops. Something is broken.", error);
-});
+    canvas = document.querySelector("#canvas_bg");
+cameraTrigger = document.querySelector("#btn-merge");
+// cameraSensor.height = canvas_s.offsetHeight;
+// cameraSensor.width = canvas_s.offsetWidth;
+
+function cameraStart() {
+    navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+            track = stream.getTracks()[0];
+            cameraView.width = canvas_s.offsetWidth;
+            cameraView.height = canvas_s.offsetHeight;
+            canvas.width = cameraView.width;
+            canvas.height = cameraView.height;
+            cameraView.srcObject = stream;
+        })
+        .catch(function(error) {
+            console.error("Oops. Something is broken.", error);
+        });
 }
-cameraTrigger.onclick = function() 
-{
-    cameraSensor.width = cameraView.videoWidth;
-    cameraSensor.height = cameraView.videoHeight;
-    cameraSensor.getContext("2d").drawImage(cameraView, 0, 0, cameraSensor.width, cameraSensor.height);
-    track.stop();
-    // create output IMG
-    var src = cameraSensor.toDataURL();
-    var ele = document.createElement("IMG");
-        ele.setAttribute("src", src);
-        ele.setAttribute("class", "snap-pic");
-        document.getElementById("process_final").appendChild(ele); 
-    
-    document.getElementById("camera").style.display = "none";
+cameraTrigger.onclick = function() {
+    // console.log(layers);
+    if (layers.length !== 0) {
+        canvas.getContext("2d").drawImage(cameraView, 0, 0, cameraView.width, cameraView.height);
+        track.stop();
+        cameraView.style.display = "none";
+    }
 };
-// document.getElementById("btn-webcam").addEventListener("click", cameraStart);

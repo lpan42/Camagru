@@ -23,55 +23,64 @@ footer {
 .stickers_div {
     float: left;
     position: relative;
-    width: 10%;
+    width: 25%;
 }
 
 .prepics_div {
     float: right;
     position: relative;
-    width: 10%;
+    width: 25%;
 }
 
 .pic_div {
     float: left;
     position: relative;
-    width: 80%;
-    height: 40vh;
+    width: 50%;
 }
 
-#btn-post {
-    position: absolute;
+.pic_div:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
 }
 
-.sticker {
-    width: 8vw;
-}
-
-.added-sticker {
-    width: 15vw;
-    position: absolute;
-    z-index: 2;
-    cursor: grab;
-}
-
-#camera--trigger {
-    position: absolute;
-    z-index: 3;
-}
-
-#canvas {
+#canvas_bg {
     width: 100%;
     height: 100%;
     border: solid black 1px;
-    /* width: 100%;
-    height: 100%; */
     /* object-fit: cover; */
     position: absolute;
     z-index: 1;
 }
 
-#camera--sensor {
+#canvas_stickers {
+    width: 100%;
+    height: 100%;
+    /* object-fit: cover; */
+    position: absolute;
+    /* border: solid red 1px; */
+    z-index: 2;
+}
+
+#btn-post {
     display: none;
+}
+
+.sticker {
+    width: 10vw;
+}
+
+#camera--view {
+    object-fit: fill;
+}
+
+#canvas_bg {
+    width: 100%;
+    height: 100%;
+    /* object-fit: cover; */
+    position: absolute;
+    /* border: solid red 1px; */
+    z-index: 1;
 }
 
 #camera--view {
@@ -79,66 +88,6 @@ footer {
     z-index: 1;
 }
 
-#final-preview {
+#final_preview {
     display: none;
-}
-
-
-/*
-.process_post
-{
-width:100%;
-height:90%;
-/* border: rgb(151, 127, 127) solid 1px; */
-
-
-/* } */
-
-
-/* 
-.toggleButton{
-background-color: black;
-color: white;
-}
-
-*/
-
-
-/* #form_upload{
-display: none;
-} */
-
-
-/* 
-
-#camera--trigger{
-text-align: center;
-vertical-align: bottom;
-position:absolute;
-z-index: 2;
-}
-
-
-.toggleDiv{
-width:100%;
-height:100%;
-position: absolute;
-z-index: 1;
-}
-
-
-/* .toggleDiv{
-display:none;
-}  */
-
-
-/* .final_pic{
-width:100%; 
-height:100%;
-}
-
-.snap-pic{
-height:100%;
-position: absolute;
-z-index: 1;
 }

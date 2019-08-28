@@ -9,16 +9,17 @@
     <?php endforeach;?>
 </div>
 <div class="pic_div" id="process_final">
-    <!-- camera -->
-    <div class="toggleDiv" id="camera">
+    <div id="camera">
         <video id="camera--view" autoplay playsinline></video>
-        <canvas id="camera--sensor"></canvas>
-        <button class="btn" id="camera--trigger">Say cheese</button>
-        <div id="added-sticker-div"></div>
+        <canvas class="canvas" id="canvas_bg"></canvas>
     </div>
+    <canvas class="canvas" id="canvas_stickers"></canvas>
 </div>
-<div id="final-preview">
+<button class="btn" id="btn-merge">Say cheese</button>
+
+<div id="final_preview">
 </div>
 <button class="btn" id="btn-post">POST</button>
+
 <script type="text/javascript" src="/public/js/webcam.js"></script>
 <script type="text/javascript" src="/public/js/js.js"></script>
