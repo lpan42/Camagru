@@ -24,6 +24,10 @@ class NewpostController extends Controller
             $this->parent->empty_page = TRUE;
             $this->upload_pic();
         }
+        if ($args[1] == 'post_pic'){
+            $this->parent->empty_page = TRUE;
+            $this->post_pic();
+        }
     }
     
     public function upload_pic(){
@@ -67,33 +71,36 @@ class NewpostController extends Controller
         $target_dir = "public/tmp/";
         $bg = $encoded["bg"];
         $stickers = $encoded["layers"];
-       
         $bg_url = explode(',', $bg["url"])[1];
         $decode_url = base64_decode($bg_url);
         $dest = imagecreatefromstring($decode_url);
-        $image = imagecreatetruecolor($bg['w'], $bg['h']);
-        imageAlphaBlending($image, true);
-        imagesavealpha($image, true);
-        imagecopy($image, $dest, 0, 0, 0, 0, $bg['w'], $bg['h']);
-        // $alpha_channel = imagecolorallocatealpha($image, 0, 0, 0, 127); 
-        // imagecolortransparent($image, $alpha_channel); 
-        // imagefill($image, 0, 0, $alpha_channel); 
-        $length = count($stickers);
-        // echo $stickers[0]['url'];
         foreach($stickers as $sticker){
-            $src = imagecreatefromstring(file_get_contents($sticker['url']));
-            imageAlphaBlending($src, true);
-            imagesavealpha($src, true);
-            imagecolortransparent($src);
-            $src_x = $sticker['x'];
-            $src_y = $sticker['y'];
-            $src_w = $sticker['w'];
-            $src_h = $sticker['h'];
-            imagecopy($image, $src, 0, 0, $src_x, $src_y, $src_w, $src_h); 
+            $src = imagecreatefrompng($sticker['url']);
+            list($width, $height) = getimagesize($sticker['url']);
+            $src_x = $sticker['pos']['x'];
+            $src_y = $sticker['pos']['y'];
+            $src_w = $sticker['size']['w'];
+            $src_h = $sticker['size']['h'];
+            $new = imagecreatetruecolor($src_w, $src_h);
+            $background = imagecolorallocatealpha($new, 255, 255, 255, 127); 
+            imagecolortransparent($new, $background);
+            imagealphablending($new, true);
+            imagesavealpha($new, true); 
+            imagefill($new, 0, 0, $background);
+            imagecopyresized($new, $src, 0, 0, 0, 0, $src_w, $src_h, $width, $height);
+            imagecopy($dest, $new, $src_x, $src_y,  0, 0, $src_w, $src_h); 
+            imagedestroy($src);
+            imagedestroy($new);
         }
         $name = $this->name_file();
-        imagepng($image, $target_dir.$name);
+        imagejpeg($dest, $target_dir.$name);
+        imagedestroy($dest);
         echo $target_dir.$name;
+    }
+
+    public function post_img(){
+        $data = json_decode($data);
+        echo '1';
     }
 }
 ?>

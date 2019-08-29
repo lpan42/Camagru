@@ -16,7 +16,6 @@ $("#fileToUpload").change(function(e) {
             } else {
                 const canvas = document.getElementById("canvas_bg");
                 const { offsetHeight, offsetWidth } = canvas;
-                // console.log(canvas, offsetWidth, offsetHeight);
                 const context = canvas.getContext("2d");
                 context.canvas.width = offsetWidth;
                 context.canvas.height = offsetHeight;

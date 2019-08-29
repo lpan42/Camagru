@@ -6,6 +6,10 @@
     padding: 3px;
 }
 
+a {
+    text-decoration: none;
+}
+
 .page-content {
     position: relative;
 }
@@ -18,12 +22,73 @@ footer {
 }
 
 
+/********** NAV  **********/
+
+#nav_bar {
+    padding: 30px;
+    position: relative;
+    height: 10vh;
+}
+
+#logo {
+    float: left;
+    font-size: 3vh;
+}
+
+#nav {
+    float: right;
+}
+
+.dropbtn {
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+ul {
+    list-style-type: none;
+}
+
+
+/* .dropdown:hover .dropbtn {
+    background-color: #3e8e41; 
+}*/
+
+
 /********** NEWPOST  **********/
 
 .stickers_div {
     float: left;
+    overflow: scroll;
     position: relative;
     width: 25%;
+    height: 50vh;
 }
 
 .prepics_div {
@@ -48,7 +113,6 @@ footer {
     width: 100%;
     height: 100%;
     border: solid black 1px;
-    /* object-fit: cover; */
     position: absolute;
     z-index: 1;
 }
@@ -56,13 +120,11 @@ footer {
 #canvas_stickers {
     width: 100%;
     height: 100%;
-    /* object-fit: cover; */
     position: absolute;
-    /* border: solid red 1px; */
     z-index: 2;
 }
 
-#btn-post {
+#btn_post {
     display: none;
 }
 
@@ -74,20 +136,17 @@ footer {
     object-fit: fill;
 }
 
-#canvas_bg {
-    width: 100%;
-    height: 100%;
-    /* object-fit: cover; */
-    position: absolute;
-    /* border: solid red 1px; */
-    z-index: 1;
-}
-
 #camera--view {
     position: absolute;
     z-index: 1;
 }
 
 #final_preview {
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+#post_again {
     display: none;
 }

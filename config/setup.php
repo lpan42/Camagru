@@ -71,7 +71,6 @@ try{
         ('public/stickers/sticker16.png'),
         ('public/stickers/sticker17.png'),
         ('public/stickers/sticker18.png'),
-        ('public/stickers/sticker19.gif'),
         ('public/stickers/sticker20.png'),
         ('public/stickers/sticker21.png'),
         ('public/stickers/sticker22.png'),

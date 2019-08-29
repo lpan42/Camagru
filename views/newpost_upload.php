@@ -1,5 +1,5 @@
 
-<div class="stickers_div">stickers_div
+<div class="stickers_div">
     <?php foreach($stickers as $sticker):?>
     <img class="sticker" src="<?=$sticker['path']?>" alt="<?=$sticker['id_sticker']?>">
     <?php endforeach;?>
@@ -20,11 +20,17 @@
     <canvas class="canvas" id="canvas_bg"></canvas>
     <canvas class="canvas" id="canvas_stickers"></canvas>
 </div>
-<button class="btn" id="btn-merge">MERGE</button>
+<button class="btn" id="btn_merge">MERGE</button>
 
 <div id="final_preview">
 </div>
-<button class="btn" id="btn-post">POST</button>
+<button class="btn" id="btn_post">POST</button>
 
+<div id ="post_again">
+    <a href="Newpost/Upload">Upload a Picture</a>
+    <a href="Newpost/Webcam">Take a Picture</a>
+    <a href="Gallery">To Gallery</a>
+</div>
 <script type="text/javascript" src="/public/js/upload.js"></script>
 <script type="text/javascript" src="/public/js/js.js"></script>
+<script type="text/javascript" src="/public/js/stickers_merge.js"></script>

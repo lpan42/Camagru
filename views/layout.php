@@ -6,37 +6,39 @@
 		<title><?= $title ?></title>
 		<link rel="stylesheet" href="/public/style.css" type="text/css"/>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		
 	</head>
-
 	<body>
-
-		<header>
-			<h1><a href="gallery">Camagru</h1>
-		</header>
 		<?php foreach ($messages as $message) : ?>
 			<p class="message"><?= $message ?></p>
 		<?php endforeach ?>
+		<div id="nav_bar">
+			<header id="logo"><a href="gallery">Camagru</a></header>
+			<ul id="nav">
+				<?php if(!$_SESSION['username']):?>
+					<li><a href="Login">Login</a></li>
+					<li><a href="Register">Register</a></li>
 
-		<?php if(!$_SESSION['username']):?>
-			<a href="Login">Login</a>
-			<a href="Register">Register</a>
-		<?php elseif($_SESSION['username']):?>
-			Welcome, <?=$_SESSION['username']?><br/>
-			<div>
-				<button>My account</button>
-				<div>
-					<a href="modify/password">Change Password</a>
-					<a href="modify/email-prefer">Email Preference</a>
+				<?php elseif($_SESSION['username']):?>
+				<li>Welcome, <?=$_SESSION['username']?></li>
+					<div class="dropdown">
+					<li class="dropbtn" id ="my_account">My account</li>
+						<div class="dropdown-content">
+						<a href="modify/password">Change Password</a>
+						<a href="modify/email-prefer">Email Preference</a>
+						</div>
+					</div>
+					<li><a href="Logout">Logout</a></li>
+			</ul>			
+
+			<div class="dropdown">
+				<button class="dropbtn" id="newpost">New Post</button>
+				<div class="dropdown-content">
+					<a href="Newpost/Upload">Upload a Picture</a>
+					<a href="Newpost/Webcam">Take a Picture</a>
 				</div>
-			</div> 
-			<a href="Logout">Logout</a>
-			<button>New Post</button>
-				<div>
-					<a class="btn" id ="btn-upload" href="Newpost/Upload">Upload a Picture</a>
-					<a class="btn" id ="btn-webcam" href="Newpost/Webcam">Take a Picture</a>
-				</div>
-		<?php endif?>
+			</div>
+			<?php endif?>
+		</div>
 		<div class="page-content">
 			<?php $this->controller->renderView();?>
 		</div>

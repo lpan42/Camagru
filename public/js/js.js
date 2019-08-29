@@ -3,7 +3,6 @@ const canvas_s = document.getElementById("canvas_stickers");
 const { offsetHeight, offsetWidth } = canvas_s;
 canvas_s.width = offsetWidth;
 canvas_s.height = offsetHeight;
-
 const context_s = canvas_s.getContext('2d');
 let layers = [];
 let selected = null;
@@ -22,10 +21,10 @@ function render() {
         if (layer === selected) {
             context_s.fillStyle = 'grey';
             context_s.strokeRect(x, y, w, h);
-            const nw = context_s.fillRect(x - 4, y - 4, 8, 8);
-            const ne = context_s.fillRect(x + w - 4, y - 4, 8, 8);
-            const sw = context_s.fillRect(x + w - 4, y + h - 4, 8, 8);
-            const se = context_s.fillRect(x - 4, y + h - 4, 8, 8);
+            context_s.fillRect(x - 4, y - 4, 8, 8);
+            context_s.fillRect(x + w - 4, y - 4, 8, 8);
+            context_s.fillRect(x + w - 4, y + h - 4, 8, 8);
+            context_s.fillRect(x - 4, y + h - 4, 8, 8);
         }
     })
     window.requestAnimationFrame(render);
@@ -99,11 +98,9 @@ canvas_s.addEventListener('dblclick', function({ clientX, clientY }) {
 });
 
 
-
 //check sticker when press post btn and merge img
-document.getElementById("btn-merge").addEventListener("click", function() {
+document.getElementById("btn_merge").addEventListener("click", function() {
     const canvas = document.getElementById("canvas_bg");
-    // console.log(canvas);
     if (layers.length === 0) {
         alert("A sticker is a must-have");
     } else {
@@ -113,7 +110,6 @@ document.getElementById("btn-merge").addEventListener("click", function() {
             "h": canvas.height
         };
         let data = { bg, layers };
-        console.log(data["layers"]);
         data = JSON.stringify(data);
         fetch('Newpost/merge_pic', {
                 method: 'POST',
@@ -126,7 +122,34 @@ document.getElementById("btn-merge").addEventListener("click", function() {
                 const div = document.getElementById("final_preview");
                 div.appendChild(img);
                 document.getElementById("process_final").style.display = "none";
+                document.getElementById("btn_merge").style.display = "none";
+                if (document.getElementById("form_upload")) {
+                    document.getElementById("form_upload").style.display = "none";
+                }
                 document.getElementById("final_preview").style.display = "block";
+                document.getElementById("btn_post").style.display = "block";
             });
     }
+});
+
+document.getElementById("btn_post").addEventListener("click", function() {
+    const final_img = document.getElementById("final_img");
+    let data = final_img.src;
+    data = JSON.stringify(data);
+    fetch('Newpost/post_pic', {
+            method: 'POST',
+            body: data,
+        })
+        .then((response) => {
+            if (response === 1) {
+                var para = document.createElement("P");
+                var node = document.createTextNode("You image has been posted, want to post another one?");
+                para.appendChild(node);
+                var div = document.getElementById("post_again");
+                div.insertBefore(para, div);
+                div.style.display = "block";
+            } else {
+
+            }
+        });
 });
