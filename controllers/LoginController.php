@@ -3,7 +3,7 @@ class LoginController extends Controller
 {
     public function process($args)
     {
-        $userManager = new UserManager;
+        $userManager = new UserManager();
         $this->head['title'] = 'Login';
         if($args[0] && $args[1])
         {

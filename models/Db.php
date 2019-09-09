@@ -21,7 +21,6 @@ class Db
     }
     public static function queryOne($query, $args = array())
     {
-
 		$result = self::$connection->prepare($query);
 		$result->execute($args);
         return $result->fetch();
@@ -53,6 +52,6 @@ class Db
 	{
 		return self::query("UPDATE `$table` SET `".implode('` = ?, `', array_keys($values))."` = ? " . $condition,
 			array_merge(array_values($values), $args));
-	}
+    }
 }
 ?>

@@ -3,7 +3,7 @@
     {
         public function process($args)
         {
-            $userManager = new UserManager;
+            $userManager = new UserManager();
             $this->head['title'] = 'Logout';
             if ($_SESSION['email'])
             {

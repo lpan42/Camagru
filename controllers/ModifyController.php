@@ -13,7 +13,7 @@ class ModifyController extends Controller
 
 	public function modify_emailprefer()
 	{
-        $userManager = new UserManager;
+        $userManager = new UserManager();
         $this->head['title'] = 'Change Email Perference';
         $user = $userManager->getUsername();
         $current = $userManager->getCurrentPrefer($user);

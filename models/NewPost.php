@@ -12,17 +12,19 @@ class NewPost
         return $stickers;
     }
     
-    public function get_prepics($username)
+    public function get_prepics($id_user)
     {
-        $galleries = Db::queryOne(
-            'SELECT id_gallery, `path`
-            FROM gallery 
-            INNER JOIN users 
-            ON gallery.id_user = users.id_user 
-            WHERE username = ?;', array($username));
+        $galleries = Db::queryAll(
+            'SELECT `id_gallery`, `path`, `creation_date`
+            FROM `gallery`
+            WHERE `id_user` = ? ORDER BY `id_gallery` DESC;', array($id_user));
         return $galleries;
     }
 
+    public function post_picture($post)
+    {
+        Db::insert('gallery', $post);
+    }
     // public function changeImagetoBase64($image){
     //     $path = $image;
     //     $type = pathinfo($path, PATHINFO_EXTENSION);

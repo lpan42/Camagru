@@ -2,18 +2,21 @@
 class NewpostController extends Controller
 {
     public function process($args){
+        $this->head['title'] = 'NewPost';
         $this->authUser();
-        $newpost = new Newpost();
-        $username = $_SESSION['username'];
+        $newpost = new NewPost();
+        $id_user = $_SESSION['id_user'];
         $stickers = $newpost->get_stickers();
-        $prepics = $newpost->get_prepics($username);
+        $prepics = $newpost->get_prepics($id_user);
         $this->data['stickers'] = $stickers;
         $this->data['prepics'] = $prepics;
         
         if($args[0] === 'Upload' && !$args[1]){
+            $this->head['title'] = 'upload';
             $this->view = 'newpost_upload';
         }
         if($args[0] === 'Webcam' && !$args[1]){
+            $this->head['title'] = 'webcam';
             $this->view = 'newpost_webcam';
         }
         if($args[0] === 'merge_pic'){
@@ -24,8 +27,8 @@ class NewpostController extends Controller
             $this->parent->empty_page = TRUE;
             $this->upload_pic();
         }
-        if ($args[1] == 'post_pic'){
-            $this->parent->empty_page = TRUE;
+        if ($args[0] == 'post_pic'){
+			$this->parent->empty_page = TRUE;
             $this->post_pic();
         }
     }
@@ -98,9 +101,36 @@ class NewpostController extends Controller
         echo $target_dir.$name;
     }
 
-    public function post_img(){
-        $data = json_decode($data);
-        echo '1';
+    public function post_pic(){
+        $target_dir = "public/gallery/";
+        $name = $this->name_file();
+        $data = trim(file_get_contents('php://input'));
+        $encoded = json_decode($data, TRUE);
+        if(copy($encoded, $target_dir.$name)){
+            try
+            {
+                $new_post = new NewPost();
+                $post = array(
+                    'id_user' => $_SESSION['id_user'],
+                    'path' => $target_dir.$name,
+                    );
+                $new_post->post_picture($post);
+                unlink($encoded);
+                echo "You picture has been posted, want to post aother one?";
+            }
+            catch (UserException $e)
+            {  
+                echo "Sorry fail to post, try again?"; 
+            }
+           
+        }
+        else{
+            echo "Sorry fail to post, try again?";
+        }
+        // $encoded = json_decode($data, TRUE);
+        
+        // var_dump($post);
+        // 
     }
 }
 ?>

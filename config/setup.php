@@ -22,14 +22,14 @@ try{
         `id_img` INT AUTO_INCREMENT PRIMARY KEY,
         `id_user` INT NOT NULL,
         `path` VARCHAR(500) NOT NULL,
-        `creation_date` DATETIME DEFAULT CURRENT_TIMESTAMP()
+        `creation_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
     );";
 
     $query_likes = "CREATE TABLE IF NOT EXISTS `likes`(
         `id_like` INT AUTO_INCREMENT PRIMARY KEY,
         `id_gallery` INT NOT NULL,
         `id_user_given` INT NOT NULL,
-        `creation_date` DATETIME DEFAULT CURRENT_TIMESTAMP()
+        `creation_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
     );";
 
     $query_comments = "CREATE TABLE IF NOT EXISTS `comments`(
@@ -37,7 +37,7 @@ try{
         `id_gallery` INT NOT NULL,
         `id_user_given` INT NOT NULL,
         `comment` VARCHAR(500) NOT NULL,
-        `creation_date` DATETIME DEFAULT CURRENT_TIMESTAMP()
+        `creation_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
     );";
 
     $query_stickers = "CREATE TABLE IF NOT EXISTS `stickers`(
@@ -46,10 +46,10 @@ try{
     );";
 
     $query_gallery = "CREATE TABLE IF NOT EXISTS `gallery`(
-        `id_gallery` INT NOT NULL,
+        `id_gallery` INT AUTO_INCREMENT PRIMARY KEY,
         `id_user` INT NOT NULL,
         `path` VARCHAR(500) NOT NULL,
-        `creation_date` DATETIME DEFAULT CURRENT_TIMESTAMP()
+        `creation_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
     );";
 
     $query_stickers_insert = "INSERT INTO `stickers` (path) VALUES

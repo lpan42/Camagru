@@ -4,9 +4,9 @@
     <img class="sticker" src="<?=$sticker['path']?>" alt="<?=$sticker['id_sticker']?>">
     <?php endforeach;?>
 </div>
-<div class="prepics_div">prepics_div
+<div class="prepics_div">
     <?php foreach($prepics as $prepic):?>
-    <img class="prepic" src="<?=$prepic['path']?>" alt="<?=$prepic['id_gallery']?>">
+    <img class="prepic" id="gallery<?=$prepic['id_gallery']?>" src="<?=$prepic['path']?>" alt="<?=$prepic['id_gallery']?>">
     <?php endforeach;?>
 </div>
 <div id="form_upload">
@@ -27,10 +27,11 @@
 <button class="btn" id="btn_post">POST</button>
 
 <div id ="post_again">
-    <a href="Newpost/Upload">Upload a Picture</a>
-    <a href="Newpost/Webcam">Take a Picture</a>
-    <a href="Gallery">To Gallery</a>
+    <p id="post_response"></p>
+    <a class="btn" id="upload_picture" href="Newpost/Upload">Upload a Picture</a>
+    <a class="btn" id="take_picture" href="Newpost/Webcam">Take a Picture</a>
+    <a class="btn" id="to_gallery" href="Gallery">To Gallery</a>
 </div>
+
 <script type="text/javascript" src="/public/js/upload.js"></script>
 <script type="text/javascript" src="/public/js/js.js"></script>
-<script type="text/javascript" src="/public/js/stickers_merge.js"></script>

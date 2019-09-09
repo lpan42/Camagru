@@ -5,6 +5,7 @@
 		<meta charset="UTF-8" />
 		<title><?= $title ?></title>
 		<link rel="stylesheet" href="/public/style.css" type="text/css"/>
+		<link href="https://fonts.googleapis.com/css?family=Pacifico|Roboto&display=swap" rel="stylesheet">
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	</head>
 	<body>
@@ -12,7 +13,7 @@
 			<p class="message"><?= $message ?></p>
 		<?php endforeach ?>
 		<div id="nav_bar">
-			<header id="logo"><a href="gallery">Camagru</a></header>
+			<header id="logo"><a href="Gallery">Camagru</a></header>
 			<ul id="nav">
 				<?php if(!$_SESSION['username']):?>
 					<li><a href="Login">Login</a></li>
@@ -43,9 +44,9 @@
 			<?php $this->controller->renderView();?>
 		</div>
 
-		<footer>
+		<!-- <footer>
 			<hr />
             © lpan 2019
-		</footer>
+		</footer> -->
 	</body>
 </html>

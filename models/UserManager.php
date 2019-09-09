@@ -26,7 +26,7 @@ class UserManager
             'password' => $this->passwordHash($password),
             'hash_active' => hash('md5', rand())
         );
-        echo 'localhost:8081/Login/'.$user['username'].'/'.$user['hash_active'];
+        echo 'localhost:8081/Login/'.$user['username'].'/'.$user['hash_active'];//
         try
         {
             Db::insert('users', $user);
@@ -70,6 +70,7 @@ class UserManager
                 throw new UserException('You account has not been actived yet, please check your email and active your account first.');
             $_SESSION['email'] = $email['email'];
             $_SESSION['username'] = $email['username'];
+            $_SESSION['id_user'] = $email['id_user'];
         }
         else if(!$email)//if the login use username
         {
@@ -83,6 +84,7 @@ class UserManager
                 throw new UserException('You account has not been actived yet, please check your email and active your account first.');
             $_SESSION['email'] = $username['email'];
             $_SESSION['username'] = $username['username'];
+            $_SESSION['id_user'] = $username['id_user'];
         }
     }
 
@@ -146,6 +148,7 @@ class UserManager
     {
         unset($_SESSION['email']);
         unset($_SESSION['username']);
+        unset($_SESSION['id_user']);
     }
 
     public function getUsername()

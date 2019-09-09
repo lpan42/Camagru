@@ -132,24 +132,24 @@ document.getElementById("btn_merge").addEventListener("click", function() {
     }
 });
 
+//post image to Gallery
 document.getElementById("btn_post").addEventListener("click", function() {
     const final_img = document.getElementById("final_img");
     let data = final_img.src;
     data = JSON.stringify(data);
+    data = data.replace(window.location.origin + "/", '');
+    // console.log(data);
     fetch('Newpost/post_pic', {
             method: 'POST',
             body: data,
         })
-        .then((response) => {
-            if (response === 1) {
-                var para = document.createElement("P");
-                var node = document.createTextNode("You image has been posted, want to post another one?");
-                para.appendChild(node);
-                var div = document.getElementById("post_again");
-                div.insertBefore(para, div);
-                div.style.display = "block";
-            } else {
-
-            }
+        .then((response) => response.text()).then((text) => {
+            var para = document.getElementById("post_response");
+            para.innerHTML = text;
+            var div = document.getElementById("post_again");
+            div.appendChild(para);
+            div.style.display = "block";
+            document.getElementById("final_preview").style.display = "none";
+            document.getElementById("btn_post").style.display = "none";
         });
 });
