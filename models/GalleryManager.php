@@ -10,9 +10,20 @@ class GalleryManager
         return $all_gallery;
     }
 
+    public function get_user_gallery($id_user){
+        $user_gallery = Db::queryAll(
+            'SELECT `username`,`gallery`.`id_user`,`id_gallery`, `path`, `creation_date`
+            FROM `gallery` JOIN `users`
+            ON `gallery`.`id_user` = `users`.`id_user`
+            WHERE `users`.`id_user` = ?
+            ORDER BY `id_gallery` DESC;',
+            array($id_user));
+        return $user_gallery;
+    }
+
     public function get_single_pic($id_gallery){
         $single_pic = Db::queryAll(
-            'SELECT `username`,`id_gallery`, `path`, `creation_date`
+            'SELECT `username`, `gallery`.`id_user`,`id_gallery`, `path`, `creation_date`
             FROM `gallery` JOIN `users`
             ON `gallery`.`id_user` = `users`.`id_user`
             WHERE `gallery`.`id_gallery` = ?;',

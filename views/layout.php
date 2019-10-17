@@ -24,6 +24,7 @@
 					<div class="dropdown">
 					<li class="dropbtn" id ="my_account">My account</li>
 						<div class="dropdown-content">
+						<a href="Gallery/user_gallery/<?=$_SESSION['id_user']?>">My Gallery</a>
 						<a href="modify/password">Change Password</a>
 						<a href="modify/email-prefer">Email Preference</a>
 						</div>

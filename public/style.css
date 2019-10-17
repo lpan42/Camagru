@@ -1,222 +1,256 @@
-/********** GENERAL **********/
-
-body {
-    font-family: 'Roboto', sans-serif;
-}
-
-.message {
-    border: 1px solid #8a9ebe;
-    background: #f9e3b3;
-    padding: 3px;
-}
-
-a {
-    text-decoration: none;
-    color: black;
-}
-
-.page-content {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    padding-top: 1rem;
-    padding-bottom: 2.5rem;
-}
-
-
-/* 
+        /********** GENERAL **********/
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .message {
+            border: 1px solid #8a9ebe;
+            background: #f9e3b3;
+            padding: 3px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        
+        .page-content {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            padding-top: 1rem;
+            padding-bottom: 2.5rem;
+        }
+        /* 
 footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 2.5rem;
 } */
-
-
-/********** NAV  **********/
-
-#nav_bar {
-    padding: 10px;
-    position: relative;
-    height: 10vh;
-    background-color: #8a9ebe;
-}
-
-#logo {
-    float: left;
-    font-size: 5vh;
-    display: block;
-    position: relative;
-    color: #f1a38f;
-    font-family: 'Pacifico', cursive;
-}
-
-#nav {
-    float: right;
-    position: relative;
-    display: block;
-}
-
-.dropbtn {
-    border: none;
-    cursor: pointer;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    z-index: 1;
-}
-
-.dropdown-content a {
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #f1f1f1
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-ul {
-    list-style-type: none;
-}
-
-
-/* .dropdown:hover .dropbtn {
+        /********** NAV  **********/
+        
+        #nav_bar {
+            padding: 10px;
+            position: relative;
+            height: 10vh;
+            background-color: #8a9ebe;
+        }
+        
+        #logo {
+            float: left;
+            font-size: 5vh;
+            display: block;
+            position: relative;
+            color: #f1a38f;
+            font-family: 'Pacifico', cursive;
+        }
+        
+        #nav {
+            float: right;
+            position: relative;
+            display: block;
+        }
+        
+        .dropbtn {
+            border: none;
+            cursor: pointer;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            z-index: 1;
+        }
+        
+        .dropdown-content a {
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #f1f1f1
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        ul {
+            list-style-type: none;
+        }
+        /* .dropdown:hover .dropbtn {
     background-color: #3e8e41; 
 }*/
-
-
-/********** NEWPOST  **********/
-
-.stickers_div {
-    float: left;
-    overflow: scroll;
-    position: relative;
-    width: 20%;
-    height: 70vh;
-}
-
-.sticker {
-    width: 80%;
-}
-
-.prepics_div {
-    float: right;
-    position: relative;
-    width: 20%;
-    overflow: scroll;
-    height: 70vh;
-}
-
-.prepic {
-    width: 80%;
-}
-
-.pic_div {
-    float: left;
-    position: relative;
-    width: 50%;
-}
-
-.pic_div:after {
-    content: "";
-    display: block;
-    padding-bottom: 100%;
-}
-
-#canvas_bg {
-    width: 100%;
-    height: 100%;
-    border: solid black 1px;
-    position: absolute;
-    z-index: 1;
-}
-
-#canvas_stickers {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 2;
-}
-
-#btn_post {
-    display: none;
-}
-
-#camera--view {
-    object-fit: fill;
-}
-
-#camera--view {
-    position: absolute;
-    z-index: 1;
-}
-
-#final_preview {
-    width: 100%;
-    height: 100%;
-    display: none;
-}
-
-#post_again {
-    display: none;
-}
-
-
-/**********GALLERY  **********/
-
-.gallery_div {
-    position: relative;
-}
-
-.gallery_cell {
-    display: inline;
-}
-
-.gallery_pic {
-    width: 40vh;
-}
-
-.icons {
-    width: 5vh;
-}
-
-.single_pic {
-    position: relative;
-    float: left;
-    width: 40%;
-    padding-left: 3vw;
-    padding-right: 3vw;
-    /* border: solid black 1px; */
-}
-
-.single_picture {
-    width: 100%;
-}
-
-.comments_likes {
-    /* border: solid black 1px; */
-    width: 40%;
-    position: relative;
-    padding-left: 3vw;
-    padding-right: 3vw;
-    float: left;
-}
-
-#new_comment {
-    width: 100%;
-    height: 5vh;
-}
+        /********** NEWPOST  **********/
+        
+        .stickers_div {
+            float: left;
+            overflow: scroll;
+            position: relative;
+            width: 20%;
+            height: 70vh;
+        }
+        
+        .sticker {
+            width: 80%;
+        }
+        
+        .prepics_div {
+            float: right;
+            position: relative;
+            width: 20%;
+            overflow: scroll;
+            height: 70vh;
+        }
+        
+        .prepic {
+            width: 80%;
+        }
+        
+        .pic_div {
+            float: left;
+            position: relative;
+            width: 50%;
+        }
+        
+        .pic_div:after {
+            content: "";
+            display: block;
+            padding-bottom: 100%;
+        }
+        
+        #canvas_bg {
+            width: 100%;
+            height: 100%;
+            border: solid black 1px;
+            position: absolute;
+            z-index: 1;
+        }
+        
+        #canvas_stickers {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 2;
+        }
+        
+        #btn_post {
+            display: none;
+        }
+        
+        #btn_redo {
+            display: none;
+        }
+        
+        #camera--view {
+            object-fit: fill;
+        }
+        
+        #camera--view {
+            position: absolute;
+            z-index: 1;
+        }
+        
+        #final_preview {
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+        
+        #post_again {
+            display: none;
+        }
+        /**********GALLERY  **********/
+        
+        .gallery_div {
+            position: relative;
+        }
+        
+        .img-container {
+            display: inline;
+        }
+        /*
+        .img-row {
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+        
+        .img-container {
+            width: 25%;
+            height: 25vw;
+            flex: 1 0 260px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+         :hover .overlay {
+            left: 0;
+        }
+        
+        .gallery_pic {
+            position: absolute;
+            top: -60px;
+            left: -60px;
+            width: 23%;
+            height: auto;
+            z-index: -100;
+        }
+        
+        .overlay {
+            display: table;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            left: -999px;
+            z-index: 0;
+            background: rgba(255, 0, 0, .4);
+            transition: all 0.3s ease;
+        }*/
+        
+        .gallery_pic {
+            width: 23%;
+        }
+        
+        .icons {
+            width: 5vh;
+        }
+        
+        .single_pic {
+            position: relative;
+            float: left;
+            width: 40%;
+            padding-left: 3vw;
+            padding-right: 3vw;
+            /* border: solid black 1px; */
+        }
+        
+        .single_picture {
+            width: 100%;
+        }
+        
+        .comments_likes {
+            /* border: solid black 1px; */
+            width: 40%;
+            position: relative;
+            padding-left: 3vw;
+            padding-right: 3vw;
+            float: left;
+        }
+        
+        #new_comment {
+            width: 100%;
+            height: 5vh;
+        }

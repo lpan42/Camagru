@@ -25,6 +25,7 @@
 <div id="final_preview">
 </div>
 <button class="btn" id="btn_post">POST</button>
+<button class="btn" id="btn_redo">REDO</button>
 
 <div id ="post_again">
     <p id="post_response"></p>

@@ -5,7 +5,6 @@ class GalleryController extends Controller
     {     
         $this->head['title'] = 'Gallery';
         $galleryManager = new GalleryManager();
-        // echo "test";
        // normal 
         if($args[0] && !$args[1]){ 
             $single_pic = $galleryManager->get_single_pic($args[0]);
@@ -50,6 +49,16 @@ class GalleryController extends Controller
             if($args[1] == "like_minus"){
                 $this->minus_like();
             }
+        }
+        //all gallery
+        else if($args[0] == "user_gallery")
+        {
+            $user_gallery = $galleryManager->get_user_gallery($args[1]);
+            if(!$user_gallery){
+                $this->redirect("error");
+            }
+            $this->data['user_gallery'] = $user_gallery;
+            $this->view='gallery_user';
         }
        else{
             $all_gallery = $galleryManager->get_gallery();

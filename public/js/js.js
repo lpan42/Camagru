@@ -128,6 +128,7 @@ document.getElementById("btn_merge").addEventListener("click", function() {
                 }
                 document.getElementById("final_preview").style.display = "block";
                 document.getElementById("btn_post").style.display = "block";
+                document.getElementById("btn_redo").style.display = "block";
             });
     }
 });
@@ -151,5 +152,16 @@ document.getElementById("btn_post").addEventListener("click", function() {
             div.style.display = "block";
             document.getElementById("final_preview").style.display = "none";
             document.getElementById("btn_post").style.display = "none";
+            document.getElementById("btn_redo").style.display = "none";
         });
+});
+//redo the pic
+document.getElementById("btn_redo").addEventListener("click", function() {
+    document.getElementById("process_final").style.display = "block";
+    document.getElementById("btn_merge").style.display = "block";
+    document.getElementById("final_preview").style.display = "none";
+    document.getElementById("btn_post").style.display = "none";
+    document.getElementById("btn_redo").style.display = "none";
+    var element = document.getElementById("final_img");
+    element.parentNode.removeChild(element);
 });
