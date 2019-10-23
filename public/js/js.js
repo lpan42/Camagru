@@ -98,6 +98,13 @@ canvas_s.addEventListener('dblclick', function({ clientX, clientY }) {
 });
 
 
+// window.addEventListener("resize", () => {
+//     console.log("CALL");
+//     const { offsetHeight, offsetWidth } = canvas_s;
+//     canvas_s.width = offsetWidth;
+//     canvas_s.height = offsetHeight;
+// });
+
 //check sticker when press post btn and merge img
 document.getElementById("btn_merge").addEventListener("click", function() {
     const canvas = document.getElementById("canvas_bg");
@@ -145,10 +152,11 @@ document.getElementById("btn_post").addEventListener("click", function() {
             body: data,
         })
         .then((response) => response.text()).then((text) => {
-            var para = document.getElementById("post_response");
+            var para = document.createElement("P");
+            para.id = "post_response";
             para.innerHTML = text;
             var div = document.getElementById("post_again");
-            div.appendChild(para);
+            div.prepend(para);
             div.style.display = "block";
             document.getElementById("final_preview").style.display = "none";
             document.getElementById("btn_post").style.display = "none";

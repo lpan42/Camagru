@@ -3,12 +3,28 @@ class GalleryManager
 {
     public function get_gallery(){
         $all_gallery = Db::queryAll(
-            'SELECT `username`,`id_gallery`, `path`, `creation_date`
-            FROM `gallery` JOIN `users`
-            ON `gallery`.`id_user` = `users`.`id_user`
-            ORDER BY `id_gallery` DESC;');
+            'SELECT `gallery`.`id_gallery`, `path`, COUNT(DISTINCT id_like) as like_count, COUNT(DISTINCT id_comment) as comment_count
+            FROM `gallery`
+            LEFT JOIN `likes` ON `gallery`.`id_gallery` = `likes`.`id_gallery`
+            left JOIN `comments` ON `gallery`.`id_gallery` = `comments`.`id_gallery`
+            GROUP BY `gallery`.`id_gallery`
+            ORDER BY `id_gallery` DESC');
         return $all_gallery;
     }
+
+
+// SELECT `username`,`id_gallery`, `path`, `creation_date`
+//             FROM `gallery` JOIN `users`
+//             ON `gallery`.`id_user` = `users`.`id_user`
+//             ORDER BY `id_gallery` DESC;
+
+
+// SELECT gallery.id_gallery, path
+// (SELECT COUNT(likes.id_like) FROM likes WHERE likes.id_gallery = gallery.id_gallery),
+// (SELECT COUNT(comments.id_comment) FROM comments WHERE comments.id_gallery = gallery.id_gallery)
+// FROM gallery
+// GROUP BY gallery.id_gallery
+// ORDER BY id_gallery DESC
 
     public function get_user_gallery($id_user){
         $user_gallery = Db::queryAll(

@@ -42,11 +42,11 @@ if ($check = document.getElementById("submit_comment")) {
         }
     })
 }
+
 document.getElementById("like_icon").addEventListener("click", function(e) {
     let icon = document.getElementById("like_icon").src;
     icon = icon.replace(window.location.origin + "/", '');
     const id_gallery = document.getElementsByClassName("single_picture")[0].id;
-    // console.log(id_gallery);
     if (icon == "public/icons/like_icon_b.png") {
         fetch('Gallery/post/like_plus', {
             method: 'POST',
@@ -57,7 +57,6 @@ document.getElementById("like_icon").addEventListener("click", function(e) {
                 return;
             }
             response.text().then((text) => {
-                console.log(text);
                 if (text == 0) {
                     alert("Please login first!");
                     return;

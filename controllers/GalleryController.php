@@ -5,7 +5,7 @@ class GalleryController extends Controller
     {     
         $this->head['title'] = 'Gallery';
         $galleryManager = new GalleryManager();
-       // normal 
+       // normal single picture
         if($args[0] && !$args[1]){ 
             $single_pic = $galleryManager->get_single_pic($args[0]);
             $comments = $galleryManager->get_comments($args[0]);
@@ -26,7 +26,7 @@ class GalleryController extends Controller
                     $check_like = 0;
                 }
             }
-            //if id_gallery does not exist
+                //if id_gallery does not exist
             if(!$single_pic){
                 $this->redirect("error");
             }
@@ -50,7 +50,7 @@ class GalleryController extends Controller
                 $this->minus_like();
             }
         }
-        //all gallery
+        //user gallery
         else if($args[0] == "user_gallery")
         {
             $user_gallery = $galleryManager->get_user_gallery($args[1]);
@@ -60,8 +60,10 @@ class GalleryController extends Controller
             $this->data['user_gallery'] = $user_gallery;
             $this->view='gallery_user';
         }
+        //all gallery
        else{
             $all_gallery = $galleryManager->get_gallery();
+            // print_r($all_gallery);
             $this->data['all_gallery'] = $all_gallery;
             $this->view = 'gallery';
         }

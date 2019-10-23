@@ -20,6 +20,7 @@
             <img class="icons" id="comment_icon" src="public/icons/comment_icon_b.png">
         <?php endif;?>
         (<span id="comment_nbr"><?php echo(count($comments));?></span>)
+        <br/><br/>
         <?php if($_SESSION['username']):?>
             <form class="comment_form"  method="POST">
                 <textarea id="new_comment" name="comment" placeholder="Add a comment..."></textarea>

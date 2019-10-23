@@ -3,8 +3,8 @@
     Login<br />
     <input type="text" name="login" /><br />
     Password<br />
-    <input type="password" name="password" /><br />
-    <input type="submit" value="Login" />
+    <input type="password" name="password" /><br/>
+   <button type="submit" value="Login">Login</button>
 </form>
-
-<p>Don't have an account? <a href="register">Register a new account</a>.</p>
+<p><a href="Modify/forgetpwd">Forget you password?</a></p>
+<p><a href="Register">Don't have an account? </a></p>

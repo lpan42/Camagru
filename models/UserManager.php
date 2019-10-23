@@ -56,6 +56,15 @@ class UserManager
 
     }
 
+    public function auth_reset_hash($username, $ranstr)
+    {
+        $hash_pwd = Db::queryone('
+            SELECT hash_pwd FROM users WHERE username = ?;', array($username));
+        if($ranstr !== $hash_pwd['hash_pwd']){
+            throw new UserException('Invalid link.');
+        }
+    }
+
     public function login($login, $password)
     {
         $email = Db::queryOne('
@@ -88,21 +97,76 @@ class UserManager
         }
     }
 
+    public function forget_pwd($login)
+    {
+        $email = Db::queryOne('
+            SELECT id_user, email, username, password, active, email_prefer, admin
+            FROM users
+            WHERE email = ?;', array($login));
+        if($email)//if the login use email
+        {
+            $emailadd = $email['email'];
+            $user = $email['username'];
+        }
+        else if(!$email)//if the login use username
+        {
+            $username = Db::queryOne('
+                SELECT id_user, email, username, password, active, email_prefer, admin
+                FROM users
+                WHERE username = ?;', array($login));
+            if (!$username){
+                throw new UserException('Invalid username or password.');
+            }
+            else{
+                $emailadd = $username['email'];
+                $user = $username['username'];
+            }
+        } 
+        $reset_email = array(
+            'hash_pwd' => hash('md5', rand())
+        );
+        echo 'localhost:8081/Modify/'.$user.'/'.$reset_email['hash_pwd'];//
+        try
+        {
+            Db::update('users', $reset_email, 'WHERE username = ?', array($user));
+            
+            EmailSender::send(
+                $emailadd, 
+                'Reset your password on Camegru', 
+                'localhost:8081/Modify/'.$user.'/'.$reset_email['hash_pwd']
+            );
+            
+        }
+        catch (PDOException $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+
+    public function reset_pwd($username, $new_pwd, $new_pwd_repeat){
+        if ($new_pwd != $new_pwd_repeat){
+            throw new UserException('New password mismatch.');
+        }
+        try{
+            $hash_new_pwd = array('password' => $this->passwordHash($new_pwd));
+            Db::update('users', $hash_new_pwd, 'WHERE username = ?', array($username));
+        }
+       catch (PDOException $e)
+       {
+           echo $e->getMessage();
+       }
+    }
+    
     public function modif_pwd($old_pwd, $new_pwd, $new_pwd_repeat)
     {
-        // print_r($old_pwd);
-        // print_r($$new_pwd);
-        // print_r($new_pwd_repeat);
         if ($new_pwd != $new_pwd_repeat){
             throw new UserException('New password mismatch.');
         }
         $username = $this->getUsername();
-        // print_r($username);
         $ver_old = Db::queryOne('
             SELECT password
             FROM users
             WHERE username = ?;', array($username));
-        // print_r($ver_old['password']);
         if (!password_verify($old_pwd, $ver_old['password']))
             throw new UserException('Old password is wrong.');
         else{
@@ -116,7 +180,7 @@ class UserManager
            }
         }
     }
-
+    
     public function getCurrentPrefer($username)
     {
 		try{
