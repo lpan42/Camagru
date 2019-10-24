@@ -40,7 +40,9 @@
                             return;
                         }
                         else{
-                            document.getElementsByClassName("img")[i].remove();
+                            const de_pic = document.getElementsByClassName("img-item")[i];
+                            console.log(de_pic.parentNode)
+                            de_pic.parentNode.removeChild(de_pic);
                         }
                     });
                 })
