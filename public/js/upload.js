@@ -27,3 +27,15 @@ $("#fileToUpload").change(function(e) {
             }
         });
 })
+
+//redo the pic
+document.getElementById("btn_redo").addEventListener("click", function() {
+    document.getElementById("process_final").style.display = "block";
+    document.getElementById("form_upload").style.display = "block";
+    document.getElementById("btn_merge").style.display = "inline";
+    document.getElementById("final_preview").style.display = "none";
+    document.getElementById("btn_post").style.display = "none";
+    document.getElementById("btn_redo").style.display = "none";
+    var element = document.getElementById("final_img");
+    element.parentNode.removeChild(element);
+});

@@ -1,8 +1,8 @@
 window.addEventListener('load', cameraStart);
 const constraints = { video: { facingMode: "user" }, audio: false };
-const cameraView = document.querySelector("#camera--view"),
-    canvas = document.querySelector("#canvas_bg");
-cameraTrigger = document.querySelector("#btn_merge");
+const cameraView = document.getElementById("camera--view"),
+    canvas = document.getElementById("canvas_bg");
+cameraTrigger = document.getElementById("btn_merge");
 
 function cameraStart() {
     navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
@@ -25,3 +25,22 @@ cameraTrigger.onclick = function() {
         cameraView.style.display = "none";
     }
 };
+
+//redo the pic
+document.getElementById("btn_redo").addEventListener("click", function() {
+    document.getElementById("process_final").style.display = "block";
+
+    const constraints = { video: { facingMode: "user" }, audio: false };
+    const cameraView = document.getElementById("camera--view"),
+        canvas = document.getElementById("canvas_bg");
+    cameraView.style.display = "inline";
+    cameraTrigger = document.getElementById("btn_merge");
+    cameraStart();
+
+    document.getElementById("btn_merge").style.display = "inline";
+    document.getElementById("final_preview").style.display = "none";
+    document.getElementById("btn_post").style.display = "none";
+    document.getElementById("btn_redo").style.display = "none";
+    var element = document.getElementById("final_img");
+    element.parentNode.removeChild(element);
+});

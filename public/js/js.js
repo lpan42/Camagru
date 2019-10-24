@@ -97,14 +97,6 @@ canvas_s.addEventListener('dblclick', function({ clientX, clientY }) {
 
 });
 
-
-// window.addEventListener("resize", () => {
-//     console.log("CALL");
-//     const { offsetHeight, offsetWidth } = canvas_s;
-//     canvas_s.width = offsetWidth;
-//     canvas_s.height = offsetHeight;
-// });
-
 //check sticker when press post btn and merge img
 document.getElementById("btn_merge").addEventListener("click", function() {
     const canvas = document.getElementById("canvas_bg");
@@ -134,8 +126,8 @@ document.getElementById("btn_merge").addEventListener("click", function() {
                     document.getElementById("form_upload").style.display = "none";
                 }
                 document.getElementById("final_preview").style.display = "block";
-                document.getElementById("btn_post").style.display = "block";
-                document.getElementById("btn_redo").style.display = "block";
+                document.getElementById("btn_post").style.display = "inline";
+                document.getElementById("btn_redo").style.display = "inline";
             });
     }
 });
@@ -162,14 +154,4 @@ document.getElementById("btn_post").addEventListener("click", function() {
             document.getElementById("btn_post").style.display = "none";
             document.getElementById("btn_redo").style.display = "none";
         });
-});
-//redo the pic
-document.getElementById("btn_redo").addEventListener("click", function() {
-    document.getElementById("process_final").style.display = "block";
-    document.getElementById("btn_merge").style.display = "block";
-    document.getElementById("final_preview").style.display = "none";
-    document.getElementById("btn_post").style.display = "none";
-    document.getElementById("btn_redo").style.display = "none";
-    var element = document.getElementById("final_img");
-    element.parentNode.removeChild(element);
 });

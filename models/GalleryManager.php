@@ -12,20 +12,6 @@ class GalleryManager
         return $all_gallery;
     }
 
-
-// SELECT `username`,`id_gallery`, `path`, `creation_date`
-//             FROM `gallery` JOIN `users`
-//             ON `gallery`.`id_user` = `users`.`id_user`
-//             ORDER BY `id_gallery` DESC;
-
-
-// SELECT gallery.id_gallery, path
-// (SELECT COUNT(likes.id_like) FROM likes WHERE likes.id_gallery = gallery.id_gallery),
-// (SELECT COUNT(comments.id_comment) FROM comments WHERE comments.id_gallery = gallery.id_gallery)
-// FROM gallery
-// GROUP BY gallery.id_gallery
-// ORDER BY id_gallery DESC
-
     public function get_user_gallery($id_user){
         $user_gallery = Db::queryAll(
             'SELECT `username`,`gallery`.`id_user`,`id_gallery`, `path`, `creation_date`
@@ -104,6 +90,21 @@ class GalleryManager
                 AND `id_user_given` = ?;', 
             array($id_gallery, $id_user_given));
         return $minus_like;
+    }
+
+    public function delete_pic_com_lik($id_gallery){
+        try{
+			Db::query('DELETE FROM `gallery`
+            WHERE `id_gallery` = ? ;', array($id_gallery));
+            Db::query('DELETE FROM `likes`
+            WHERE `id_gallery` = ? ;', array($id_gallery));
+            Db::query('DELETE FROM `comments` 
+            WHERE `id_gallery` = ? ;', array($id_gallery));
+        }
+		catch (PDOException $e)
+		{
+			echo $e->getMessage();
+		}
     }
 }
 ?>

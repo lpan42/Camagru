@@ -1,0 +1,1 @@
+<p>It is show that you have not posted any picture.</p>

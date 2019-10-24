@@ -10,6 +10,7 @@
 </label>
 
 
+
 <script>
   document.getElementById("switch_email").addEventListener("click", function() {
   var text = document.getElementsByTagName("input")[0].checked;

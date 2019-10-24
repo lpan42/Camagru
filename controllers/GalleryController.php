@@ -4,9 +4,9 @@ class GalleryController extends Controller
     public function process($args)
     {     
         $this->head['title'] = 'Gallery';
-        $galleryManager = new GalleryManager();
        // normal single picture
         if($args[0] && !$args[1]){ 
+            $galleryManager = new GalleryManager();
             $single_pic = $galleryManager->get_single_pic($args[0]);
             $comments = $galleryManager->get_comments($args[0]);
             $likes = $galleryManager->get_likes($args[0]);
@@ -28,7 +28,7 @@ class GalleryController extends Controller
             }
                 //if id_gallery does not exist
             if(!$single_pic){
-                $this->redirect("error");
+                $this->redirect('error');
             }
             $this->data['single_pic'] = $single_pic;
             $this->data['comments'] = $comments;
@@ -37,6 +37,7 @@ class GalleryController extends Controller
             $this->data['check_like'] = $check_like;
             $this->view = 'gallery_single';
         }
+
         //need to post new comments or likes
         else if($args[0] == "post"){
             $this->parent->empty_page = TRUE;
@@ -50,20 +51,30 @@ class GalleryController extends Controller
                 $this->minus_like();
             }
         }
+
         //user gallery
         else if($args[0] == "user_gallery")
         {
+            $galleryManager = new GalleryManager();
             $user_gallery = $galleryManager->get_user_gallery($args[1]);
             if(!$user_gallery){
-                $this->redirect("error");
+                $this->addMessage('Seems you have not posted any picture yet. Post one now!');
+                $this->redirect('firstpost'); 
             }
             $this->data['user_gallery'] = $user_gallery;
             $this->view='gallery_user';
         }
+
+        //user delete pics
+        else if($args[0] == "delete" && $args[1] == "picture"){
+            $this->parent->empty_page = TRUE;
+            $this->delete_pic();
+        }
+
         //all gallery
        else{
+            $galleryManager = new GalleryManager();
             $all_gallery = $galleryManager->get_gallery();
-            // print_r($all_gallery);
             $this->data['all_gallery'] = $all_gallery;
             $this->view = 'gallery';
         }
@@ -94,6 +105,13 @@ class GalleryController extends Controller
         $galleryManager = new GalleryManager();
         $minus_like = $galleryManager->minus_like($id_gallery, $id_user_given);
         echo($minus_like);
+    }
+
+    public function delete_pic(){
+        $id_gallery = trim(file_get_contents('php://input'));
+        $galleryManager = new GalleryManager();
+        $galleryManager->delete_pic_com_lik($id_gallery);
+        // echo $id_gallery;
     }
 }
 ?>

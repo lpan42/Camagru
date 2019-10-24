@@ -14,33 +14,36 @@
 		<?php endforeach ?>
 		<div id="nav_bar">
 			<header id="logo"><a href="Gallery">Camagru</a></header>
+
+			<?php if($_SESSION['username']):?>
+				<div class="dropdown">
+					<button class="dropbtn" id="newpost">New Post</button>
+					<div class="dropdown-content">
+						<a href="Newpost/Upload">Upload a Picture</a>
+						<a href="Newpost/Webcam">Take a Picture</a>
+					</div>
+				</div>
+			<?php endif?>
+
 			<ul id="nav">
 				<?php if(!$_SESSION['username']):?>
 					<li><a href="Login">Login</a></li>
 					<li><a href="Register">Register</a></li>
-
 				<?php elseif($_SESSION['username']):?>
-				<li>Welcome, <?=$_SESSION['username']?></li>
+					<li>Welcome, <?=$_SESSION['username']?></li>
 					<div class="dropdown">
 					<li class="dropbtn" id ="my_account">My account</li>
 						<div class="dropdown-content">
-						<a href="Gallery/user_gallery/<?=$_SESSION['id_user']?>">My Gallery</a>
-						<a href="modify/password">Change Password</a>
-						<a href="modify/email-prefer">Email Preference</a>
+							<a href="Gallery/user_gallery/<?=$_SESSION['id_user']?>">My Gallery</a>
+							<a href="modify/password">Change Password</a>
+							<a href="modify/email-prefer">Email Preference</a>
 						</div>
 					</div>
 					<li><a href="Logout">Logout</a></li>
 			</ul>			
-
-			<div class="dropdown">
-				<button class="dropbtn" id="newpost">New Post</button>
-				<div class="dropdown-content">
-					<a href="Newpost/Upload">Upload a Picture</a>
-					<a href="Newpost/Webcam">Take a Picture</a>
-				</div>
-			</div>
 			<?php endif?>
 		</div>
+
 		<div class="page-content">
 			<?php $this->controller->renderView();?>
 		</div>
