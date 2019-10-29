@@ -25,7 +25,6 @@
           body: data,
       })
       .then((response) => response.text()).then((text) => {
-        console.log(text);
         if(text == 1){
           document.getElementsByTagName("P")[0].innerHTML = "Enable";
         }

@@ -15,7 +15,7 @@ function autoloadFunction($class)
        require(__DIR__."/models/" . $class . ".php");
     }
 }
-spl_autoload_register("autoloadFunction");
+spl_autoload_register("autoloadFunction");// Register given function as __autoload() implementation
 
 //echo $DB_DSN;
 Db::connect($DB_DSN, $DB_USER, $DB_PASSWORD);
@@ -23,5 +23,5 @@ Db::connect($DB_DSN, $DB_USER, $DB_PASSWORD);
 $router = new RouterController();
 $router->process(array($_SERVER['REQUEST_URI']));
 $router->renderView();
-// session_unset();
+//session_unset();
 ?>  

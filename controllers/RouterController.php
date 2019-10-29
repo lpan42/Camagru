@@ -23,7 +23,7 @@ class RouterController extends Controller
 	{
 		$parsedUrl = $this->parseUrl($args[0]);
 		if (empty($parsedUrl[0]))
-			$this->redirect('login');
+			$this->redirect('gallery');
 		$controllerClass = $this->dashesToCamel(array_shift($parsedUrl)) . 'Controller';
 		if (file_exists('controllers/' . $controllerClass . '.php'))
         	$this->controller = new $controllerClass;

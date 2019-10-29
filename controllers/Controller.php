@@ -5,7 +5,7 @@ abstract class Controller //the parent class for all controllers
     protected $view = "";
     protected $head = "";
     protected $parent = NULL;
-    protected $empty_page = FALSE;
+    protected $empty_page = FALSE; //include layout or got the return for Fetch
     
     abstract function process($args);
     
@@ -69,13 +69,5 @@ abstract class Controller //the parent class for all controllers
         $name = $username.date('YmdHis').".jpg";
         return $name;
     }
-
-    // public function changeImagetoBase64($image){
-    //     $path = $image;
-    //     $type = pathinfo($path, PATHINFO_EXTENSION);
-    //     $data = file_get_contents($path);
-    //     $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-    //     return $base64;
-    // }
 }
 ?>

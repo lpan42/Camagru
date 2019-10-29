@@ -48,9 +48,9 @@
 			<?php $this->controller->renderView();?>
 		</div>
 
-		<!-- <footer>
+		<footer>
 			<hr />
-            © lpan 2019
-		</footer> -->
+            42 CAMAGRU © lpan 2019
+		</footer>
 	</body>
 </html>

@@ -55,11 +55,11 @@ class GalleryController extends Controller
         //user gallery
         else if($args[0] == "user_gallery")
         {
+            $this->head['title'] = 'My Gallery';
             $galleryManager = new GalleryManager();
             $user_gallery = $galleryManager->get_user_gallery($args[1]);
             if(!$user_gallery){
-                $this->addMessage('Seems you have not posted any picture yet. Post one now!');
-                $this->redirect('firstpost'); 
+                $this->redirect('firstpost');
             }
             $this->data['user_gallery'] = $user_gallery;
             $this->view='gallery_user';

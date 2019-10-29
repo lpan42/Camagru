@@ -11,7 +11,7 @@
                 {
                     $userManager->logout();
                     $this->addMessage('You were successfully logged off.');
-                // $this->redirect('login');
+                    $this->redirect('gallery');
                 }
                 catch (UserException $ex)
                 {
@@ -20,7 +20,6 @@
             }
             else
                 $this->addMessage('You did not login.');
-           // $this->view = 'logout';
         }
     }
 ?>

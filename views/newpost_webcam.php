@@ -14,9 +14,9 @@
             <div id="final_preview">
             </div>
             <div id ="post_again">
-                <button class="btn" id="upload_picture"><a href="Newpost/Upload" style="color:white;">Upload a Picture</a></button>
-                <button class="btn" id="take_picture"><a href="Newpost/Webcam" style="color:white;">Take a Picture</a></button>
-                <button class="btn" id="to_gallery"> <a href="Gallery" style="color:white;">To Gallery</a></button>
+                <button class="btn" id="upload_picture"><a href="Newpost/Upload">Upload a Picture</a></button>
+                <button class="btn" id="take_picture"><a href="Newpost/Webcam">Take a Picture</a></button>
+                <button class="btn" id="to_gallery"> <a href="Gallery">To Gallery</a></button>
             </div>
         </div>
 </div>
@@ -26,9 +26,13 @@
     <?php endforeach;?>
   </aside>
   <aside class="aside aside-2">
-    <?php foreach($prepics as $prepic):?>
+    <?php if($prepics):?>
+      <?php foreach($prepics as $prepic):?>
         <img class="prepic" id="gallery<?=$prepic['id_gallery']?>" src="<?=$prepic['path']?>" alt="<?=$prepic['id_gallery']?>">
-    <?php endforeach;?>
+      <?php endforeach;?>
+      <?php else:?>
+        <p> You don't have any posted picture.</p>
+    <?php endif;?>
   </aside>
 </div>
 

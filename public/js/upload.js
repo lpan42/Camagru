@@ -1,4 +1,4 @@
-$("#fileToUpload").change(function(e) {
+document.getElementById("fileToUpload").addEventListener("change", function(e) {
     e.preventDefault();
     const fd = new FormData();
     const files = $('#fileToUpload')[0].files[0];
@@ -8,7 +8,7 @@ $("#fileToUpload").change(function(e) {
             body: fd,
         })
         .then((response) => response.text()).then((text) => {
-            console.log(text);
+            // console.log(text);
             if (text == -1) {
                 alert("Only jpg, jpeg, png, gif file are allowed");
             } else if (text == 0) {

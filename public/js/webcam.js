@@ -14,7 +14,7 @@ function cameraStart() {
             cameraView.srcObject = stream;
         })
         .catch(function(error) {
-            console.error("Oops. Something is broken.", error);
+            alert("Oops. Something is broken.", error);
         });
 }
 cameraTrigger.onclick = function() {

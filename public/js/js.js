@@ -100,9 +100,15 @@ canvas_s.addEventListener('dblclick', function({ clientX, clientY }) {
 //check sticker when press post btn and merge img
 document.getElementById("btn_merge").addEventListener("click", function() {
     const canvas = document.getElementById("canvas_bg");
+    // console.log(canvas);
     if (layers.length === 0) {
         alert("A sticker is a must-have");
     } else {
+        if (canvas.width !== canvas.offsetWidth || canvas.height !== canvas.offsetHeight) {
+            const { offsetHeight, offsetWidth } = canvas;
+            canvas.width = offsetWidth;
+            canvas.height = offsetHeight;
+        }
         var bg = {
             "url": canvas.toDataURL('image/png'),
             "w": canvas.width,
@@ -154,4 +160,4 @@ document.getElementById("btn_post").addEventListener("click", function() {
             document.getElementById("btn_post").style.display = "none";
             document.getElementById("btn_redo").style.display = "none";
         });
-});
+});;

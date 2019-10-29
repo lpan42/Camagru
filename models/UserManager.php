@@ -6,10 +6,22 @@ class UserManager
         return password_hash($password, PASSWORD_DEFAULT);
     }
 
+    public function auth_pwd($password){
+        $uppercase = preg_match('@[A-Z]@', $password);
+        $lowercase = preg_match('@[a-z]@', $password);
+        $number    = preg_match('@[0-9]@', $password);
+        if(!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
+            throw new UserException('Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.');
+        }
+    }
+
     public function register($email, $username, $password, $password_repeat)
     {
         if ($password != $password_repeat){
-               throw new UserException('Password mismatch.');
+            throw new UserException('Password mismatch.');
+        }
+        if(strlen($username) < 3 || strlen($username) > 15){
+            throw new UserException('Username should have at least 3 and no more than 15 characters.');
         }
         $checkEmail = Db::query('SELECT id_user FROM users WHERE email = ?;', array($email));
         if($checkEmail){
@@ -19,7 +31,7 @@ class UserManager
         if($checkUsername){
             throw new UserException('This username has already been taken.');
         }
-
+        $this->auth_pwd($password);
         $user = array(
             'email' => $email,
             'username' => $username,
@@ -147,6 +159,7 @@ class UserManager
         if ($new_pwd != $new_pwd_repeat){
             throw new UserException('New password mismatch.');
         }
+        $this->auth_pwd($password);
         try{
             $hash_new_pwd = array('password' => $this->passwordHash($new_pwd));
             Db::update('users', $hash_new_pwd, 'WHERE username = ?', array($username));
@@ -162,6 +175,7 @@ class UserManager
         if ($new_pwd != $new_pwd_repeat){
             throw new UserException('New password mismatch.');
         }
+        $this->auth_pwd($password);
         $username = $this->getUsername();
         $ver_old = Db::queryOne('
             SELECT password
@@ -210,9 +224,7 @@ class UserManager
 
     public function logout()
     {
-        unset($_SESSION['email']);
-        unset($_SESSION['username']);
-        unset($_SESSION['id_user']);
+        session_unset();
     }
 
     public function getUsername()

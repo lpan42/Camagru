@@ -19,33 +19,33 @@
 
 <script>
     const delete_btns = document.getElementsByClassName('delete_btn');
-    for(let i = 0; i < delete_btns.length; i++){
-        delete_btns[i]. addEventListener("click", function(e) {
-            // console.log(delete_btns[i].id);
-            delete_btns[i].style.display="none";
-            const delete_comfirm = document.getElementsByClassName("delete_comfirm");
-                // console.log(i);
-                delete_comfirm[i].style.display="inline";
-                document.getElementsByClassName("cancel")[i].addEventListener("click", function(e) {
-                    delete_btns[i].style.display="inline";
-                    delete_comfirm[i].style.display="none";
-                })
-                document.getElementsByClassName("yes")[i].addEventListener("click", function(e) {
+    document.getElementsByClassName("img-container")[0].addEventListener('click', (event) => {
+        const delete_btns = document.getElementsByClassName('delete_btn');
+        [...delete_btns].forEach((btn) => {
+            if (btn == event.target)
+            {
+                const delete_conf = btn.parentNode.getElementsByClassName("delete_comfirm")[0];
+                delete_conf.style.display="inline"
+                const cancel = delete_conf.getElementsByClassName("cancel")[0];
+                cancel.onclick = () => {
+                    delete_conf.style.display = "none";
+                }
+                const yes = delete_conf.getElementsByClassName("yes")[0];
+                yes.onclick = () => {
                     fetch('Gallery/delete/picture', {
                         method: 'POST',
-                        body: delete_btns[i].id,
+                        body: btn.id,
                     }).then(function(response){
                         if (response.status !== 200) {
-                            console.log('Looks like there was a problem. Status Code: '.response.status);
+                            alert('Looks like there was a problem. Status Code: '.response.status);
                             return;
                         }
                         else{
-                            const de_pic = document.getElementsByClassName("img-item")[i];
-                            console.log(de_pic.parentNode)
-                            de_pic.parentNode.removeChild(de_pic);
+                            btn.parentNode.parentNode.removeChild(btn.parentNode);
                         }
                     });
-                })
-            })
-}      
+                }
+            }
+        })
+    })    
 </script>

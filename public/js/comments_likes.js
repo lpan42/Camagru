@@ -13,11 +13,10 @@ if ($check = document.getElementById("submit_comment")) {
                 body: data,
             }).then(function(response) {
                 if (response.status !== 200) {
-                    console.log('Looks like there was a problem. Status Code: '.response.status);
+                    alert('Looks like there was a problem. Status Code: '.response.status);
                     return;
                 }
                 response.text().then((text) => {
-                    console.log(text);
                     if (text == 0) {
                         alert("Please login first!");
                         return;
@@ -53,7 +52,7 @@ document.getElementById("like_icon").addEventListener("click", function(e) {
             body: id_gallery,
         }).then(function(response) {
             if (response.status !== 200) {
-                console.log('Looks like there was a problem. Status Code: '.response.status);
+                alert('Looks like there was a problem. Status Code: '.response.status);
                 return;
             }
             response.text().then((text) => {
@@ -73,7 +72,7 @@ document.getElementById("like_icon").addEventListener("click", function(e) {
             body: id_gallery,
         }).then(function(response) {
             if (response.status !== 200) {
-                console.log('Looks like there was a problem. Status Code: '.response.status);
+                alert('Looks like there was a problem. Status Code: '.response.status);
                 return;
             } else {
                 document.getElementById("like_icon").src = "public/icons/like_icon_b.png";
