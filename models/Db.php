@@ -53,5 +53,14 @@ class Db
 		return self::query("UPDATE `$table` SET `".implode('` = ?, `', array_keys($values))."` = ? " . $condition,
 			array_merge(array_values($values), $args));
     }
+
+     // Only for query pages in gallery
+	public static function queryPages($query, $offset_nbr)
+	{
+        $result = self::$connection->prepare($query);
+        $result->bindValue(':offset', (int)$offset_nbr, PDO::PARAM_INT);
+		$result->execute();
+        return $result->fetchAll();
+    }
 }
 ?>

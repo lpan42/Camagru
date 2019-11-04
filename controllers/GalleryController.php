@@ -5,11 +5,11 @@ class GalleryController extends Controller
     {     
         $this->head['title'] = 'Gallery';
        // normal single picture
-        if($args[0] && !$args[1]){ 
+        if($args[0] == "single_pic" && $args[1]){ 
             $galleryManager = new GalleryManager();
-            $single_pic = $galleryManager->get_single_pic($args[0]);
-            $comments = $galleryManager->get_comments($args[0]);
-            $likes = $galleryManager->get_likes($args[0]);
+            $single_pic = $galleryManager->get_single_pic($args[1]);
+            $comments = $galleryManager->get_comments($args[1]);
+            $likes = $galleryManager->get_likes($args[1]);
             foreach($comments as $comment){
                 if($comment['id_user_given'] == $_SESSION['id_user']){
                     $check_comment = 1;
@@ -71,10 +71,14 @@ class GalleryController extends Controller
             $this->delete_pic();
         }
 
-        //all gallery
-       else{
+        else if($args[0] == "pagination"){
+            $this->parent->empty_page = TRUE;
+            $this->pagination();
+        }
+        //all gallery_load first 6
+       else {
             $galleryManager = new GalleryManager();
-            $all_gallery = $galleryManager->get_gallery();
+            $all_gallery = $galleryManager->get_gallery(0);
             $this->data['all_gallery'] = $all_gallery;
             $this->view = 'gallery';
         }
@@ -110,8 +114,17 @@ class GalleryController extends Controller
     public function delete_pic(){
         $id_gallery = trim(file_get_contents('php://input'));
         $galleryManager = new GalleryManager();
-        $galleryManager->delete_pic_com_lik($id_gallery);
-        // echo $id_gallery;
+        $path = $galleryManager->delete_pic_com_lik($id_gallery);
+        if (file_exists($path[0])){
+               unlink($path[0]);
+        }
+    }
+
+    public function pagination(){
+        $offset_nbr = trim(file_get_contents('php://input'));
+        $galleryManager = new GalleryManager();
+        $all_gallery = $galleryManager->get_gallery($offset_nbr);
+        print_r(json_encode($all_gallery));
     }
 }
 ?>

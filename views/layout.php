@@ -6,6 +6,7 @@
 		<title><?= $title ?></title>
 		<link rel="stylesheet" href="/public/style.css" type="text/css"/>
 		<link href="https://fonts.googleapis.com/css?family=Pacifico|Roboto&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	</head>
 	<body>
@@ -43,7 +44,7 @@
 			</ul>			
 			<?php endif?>
 		</div>
-
+		
 		<div class="page-content">
 			<?php $this->controller->renderView();?>
 		</div>

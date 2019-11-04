@@ -1,14 +1,15 @@
 <?php
 class GalleryManager
 {
-    public function get_gallery(){
-        $all_gallery = Db::queryAll(
-            'SELECT `gallery`.`id_gallery`, `path`, COUNT(DISTINCT id_like) as like_count, COUNT(DISTINCT id_comment) as comment_count
+    public function get_gallery($offset_nbr){
+        $all_gallery = Db::queryPages(
+            "SELECT `gallery`.`id_gallery`, `path`, COUNT(DISTINCT id_like) as like_count, COUNT(DISTINCT id_comment) as comment_count
             FROM `gallery`
             LEFT JOIN `likes` ON `gallery`.`id_gallery` = `likes`.`id_gallery`
             left JOIN `comments` ON `gallery`.`id_gallery` = `comments`.`id_gallery`
             GROUP BY `gallery`.`id_gallery`
-            ORDER BY `id_gallery` DESC');
+            ORDER BY `id_gallery` 
+            DESC LIMIT 6 OFFSET :offset", $offset_nbr);
         return $all_gallery;
     }
 
@@ -94,12 +95,15 @@ class GalleryManager
 
     public function delete_pic_com_lik($id_gallery){
         try{
+            $path = Db::queryOne('SELECT `path` FROM `gallery`
+                WHERE `id_gallery` = ? ;', array($id_gallery));
 			Db::query('DELETE FROM `gallery`
             WHERE `id_gallery` = ? ;', array($id_gallery));
             Db::query('DELETE FROM `likes`
             WHERE `id_gallery` = ? ;', array($id_gallery));
             Db::query('DELETE FROM `comments` 
             WHERE `id_gallery` = ? ;', array($id_gallery));
+            return $path;
         }
 		catch (PDOException $e)
 		{
