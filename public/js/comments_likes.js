@@ -1,3 +1,4 @@
+// post comment
 if ($check = document.getElementById("submit_comment")) {
     $check.addEventListener("click", function(e) {
         e.preventDefault();
@@ -24,17 +25,18 @@ if ($check = document.getElementById("submit_comment")) {
                         const newComment = document.createElement("P");
                         newComment.className = "comment_info";
                         const a = document.createElement("A");
-                        var linkText = document.createTextNode("[" + text.trim() + "]");
+                        const linkText = document.createTextNode("[" + text.trim() + "]");
                         a.appendChild(linkText);
                         a.href = "#";
                         newComment.appendChild(a);
-                        var textnode = document.createTextNode(comment);
+                        const textnode = document.createTextNode(comment);
                         newComment.appendChild(textnode);
-                        var list = document.getElementById("comments_div");
+                        const list = document.getElementById("comments_div");
                         list.insertBefore(newComment, list.childNodes[0]);
-                        var addOne = parseInt(document.getElementById("comment_nbr").innerHTML) + 1;
+                        const addOne = parseInt(document.getElementById("comment_nbr").innerHTML) + 1;
                         document.getElementById("comment_nbr").innerHTML = addOne;
                         document.getElementById("comment_icon").src = "public/icons/comment_icon.png";
+                        textarea = document.getElementById("new_comment").value = "";
                     }
                 });
             });

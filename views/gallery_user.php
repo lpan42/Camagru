@@ -1,6 +1,6 @@
 <div class="gallery_div">
     <p id="username"><?=$user_gallery[0]['username']?>'s Gallery
-    <div class="img-container">
+    <div class="img-container-single">
         <?php foreach($user_gallery as $gallery):?>
             <div class="img-item">
                 <a href="Gallery/single_pic/<?=$gallery['id_gallery']?>"><img class="gallery_pic" src="<?=$gallery['path']?>" alt="<?=$gallery['id_gallery']?>"></a>
@@ -25,7 +25,7 @@
 </div>
 
 <script>
-    document.getElementsByClassName("img-container")[0].addEventListener('click', (event) => {
+    document.getElementsByClassName("img-container-single")[0].addEventListener('click', (event) => {
         const delete_btns = document.getElementsByClassName('delete_btn');
         [...delete_btns].forEach((btn) => {
             if (btn == event.target)
@@ -57,7 +57,7 @@
         })
     })    
 
-    document.getElementsByClassName("img-container")[0].addEventListener('click', (event) => {
+    document.getElementsByClassName("img-container-single")[0].addEventListener('click', (event) => {
         const share_btns = document.getElementsByClassName('share_btn');
         [...share_btns].forEach((btn) => {
             if (btn == event.target)

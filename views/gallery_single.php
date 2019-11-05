@@ -1,4 +1,4 @@
-<div class="img-container">
+<div class="img-container-single">
     <div class="single_pic">
         <a href="Gallery/user_gallery/<?=$single_pic[0]['id_user']?>"><p id="username"><?=$single_pic[0]['username']?></p></a>
         <p id="creation_date"><?=$single_pic[0]['creation_date']?></p>

@@ -29,7 +29,7 @@ hr {
 .page-content {
     position: relative;
     /* width: 100%; */
-    height: 100%;
+    /* height: 100%; */
     padding: 1rem 1rem;
 }
 
@@ -59,6 +59,14 @@ button:active {
 
 ul {
     list-style-type: none;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    text-align: right;
 }
 
 
@@ -114,14 +122,6 @@ ul {
 
 .dropdown:hover .dropdown-content {
     display: block;
-}
-
-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 40px;
-    text-align: right;
 }
 
 
@@ -181,11 +181,11 @@ input:checked+.slider:before {
 
 /* 
 .slider.round {
-    border-radius: 34px;
+border-radius: 34px;
 }
 
 .slider.round:before {
-    border-radius: 50%;
+border-radius: 50%;
 } */
 
 
@@ -204,7 +204,6 @@ input:checked+.slider:before {
 
 .main {
     text-align: center;
-    height: 60vh;
 }
 
 @media all and (min-width: 600px) {
@@ -226,27 +225,24 @@ input:checked+.slider:before {
     .aside-2 {
         order: 3;
     }
-    .footer {
-        order: 4;
-    }
 }
 
 .aside-1 {
     height: 60vh;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .aside-2 {
     height: 60vh;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .sticker {
-    width: 100px;
+    width: 60%;
 }
 
 .prepic {
-    width: 100px;
+    width: 60%;
 }
 
 #process_final {
@@ -302,20 +298,31 @@ input:checked+.slider:before {
 
 .gallery_div {
     position: relative;
+    text-align: center;
+    margin: 25px;
 }
 
 .img-container {
     display: flex;
     flex-flow: row wrap;
-    justify-content: flex-start;
-    width: 600px;
+    justify-content: center;
+    width: 50vw;
     height: 80vh;
     overflow: auto;
-    border: solid black 1px;
+    margin: auto;
+}
+
+.img-container-single {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin: auto;
+    height: 80vh;
+    overflow: auto;
 }
 
 .img-item {
-    width: 300px;
+    width: 400px;
     margin: 5px;
     position: relative;
 }
@@ -323,7 +330,7 @@ input:checked+.slider:before {
 .img-item .gallery_pic {
     display: inline;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     z-index: 1;
 }
 
@@ -385,6 +392,7 @@ input:checked+.slider:before {
     z-index: 2;
     text-align: center;
     transition: 0.5s ease;
+    padding: 10px 25px;
 }
 
 .delete_comfirm {
@@ -393,9 +401,11 @@ input:checked+.slider:before {
     background: rgba(245, 164, 144, 0.6);
     position: absolute;
     bottom: 2px;
-    left: 2px;
+    left: 0px;
     z-index: 2;
     display: none;
+    width: 100%;
+    padding: inherit;
 }
 
 .img-item:hover .share_btn {
@@ -418,7 +428,7 @@ input:checked+.slider:before {
     position: absolute;
     width: 100%;
     bottom: 2px;
-    left: 2px;
+    left: 0px;
     z-index: 2;
     display: none;
 }
