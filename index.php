@@ -1,5 +1,6 @@
 <?php
 require_once 'config/database.php';
+// require_once 'config/setup.php';
 
 session_start();
 mb_internal_encoding("UTF-8");

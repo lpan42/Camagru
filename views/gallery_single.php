@@ -32,7 +32,7 @@
             <?php endif?>
             <div id="comments_div">
                 <?php foreach ($comments as $comment) : ?>
-                    <p class="comment_info"><b>[<a href="Gallery/user_gallery/<?=$comment['id_user_given']?>"><?=$comment['username']?></a>]</b><?=$comment['comment']?></p>
+                    <p class="comment_info"><b>[<a href="Gallery/user_gallery/<?=$comment['id_user_given']?>"><?=$comment['username']?></a>] </b><?=$comment['comment']?></p>
                 <?php endforeach ?>
             </div>
         </div>

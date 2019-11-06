@@ -18,12 +18,12 @@ try{
         `admin` BOOLEAN DEFAULT FALSE
     );";
 
-    $query_imgs = "CREATE TABLE IF NOT EXISTS `imgs`(
-        `id_img` INT AUTO_INCREMENT PRIMARY KEY,
-        `id_user` INT NOT NULL,
-        `path` VARCHAR(500) NOT NULL,
-        `creation_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-    );";
+    // $query_imgs = "CREATE TABLE IF NOT EXISTS `imgs`(
+    //     `id_img` INT AUTO_INCREMENT PRIMARY KEY,
+    //     `id_user` INT NOT NULL,
+    //     `path` VARCHAR(500) NOT NULL,
+    //     `creation_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    // );";
 
     $query_likes = "CREATE TABLE IF NOT EXISTS `likes`(
         `id_like` INT AUTO_INCREMENT PRIMARY KEY,
@@ -78,14 +78,10 @@ try{
         ('public/stickers/sticker24.png'),
         ('public/stickers/sticker25.png'),
         ('public/stickers/sticker26.png'),
-        ('public/stickers/frame1.png'),
-        ('public/stickers/frame2.png'),
-        ('public/stickers/frame3.png'),
-        ('public/stickers/frame4.png'),
-        ('public/stickers/frame5.png');";
+        ('public/stickers/sticker27.png');";
 
     $connection->exec($query_users);
-    $connection->exec($query_imgs);
+    // $connection->exec($query_imgs);
     $connection->exec($query_likes);
     $connection->exec($query_comments);
     $connection->exec($query_stickers);
@@ -93,7 +89,7 @@ try{
     $connection->exec($query_stickers_insert);
 
 
-    echo "Database $DB_NAME has been built successfully";
+    echo "Database $DB_NAME has been built successfully <br>";
     }
     catch(PDOException $e){
         echo $e->getMessage();

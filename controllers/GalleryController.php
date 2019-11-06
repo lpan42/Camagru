@@ -91,7 +91,7 @@ class GalleryController extends Controller
         $id_gallery = $encoded['id_gallery'];
         $comment = $encoded['comment'];
         $id_user_given = $_SESSION['id_user'];
-        $galleryManager->new_comment($comment, $id_gallery, $id_user_given);
+        $email = $galleryManager->new_comment($comment, $id_gallery, $id_user_given);
         echo(trim($_SESSION["username"]));
     }
 

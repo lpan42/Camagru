@@ -28,9 +28,9 @@ abstract class Controller //the parent class for all controllers
 
     public function addMessage($message)
     {
-        if (isset($_SESSION['messages']))
-            $_SESSION['messages'][] = $message;
-        else
+        // if (isset($_SESSION['messages']))
+        //     $_SESSION['messages'][] = $message;
+        // else
             $_SESSION['messages'] = array($message);
     }
 

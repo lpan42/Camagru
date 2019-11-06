@@ -53,7 +53,6 @@ class GalleryManager
             array($id_gallery));
         return $likes;
     }
-    
 
     public function new_comment($comment, $id_gallery, $id_user_given){
         $new = array(
@@ -62,14 +61,27 @@ class GalleryManager
             'comment' => $comment
         );
         try{
-			Db::insert('comments', $new);
+            Db::insert('comments', $new);
+            $post_user = Db::queryOne(
+                'SELECT `users`.`id_user`, `email_prefer`, `email`
+                FROM `users` JOIN `gallery`
+                on `gallery`.`id_user` = `users`.`id_user`
+                WHERE `gallery`.`id_gallery` = ?', array($id_gallery));
+                // print_r($post_user['id_user']);
+            if($post_user['email_prefer'] == 1){
+                EmailSender::send(
+                    $post_user['email'], 
+                    'You picture on Camagru just received a new comment', 
+                    'You picture on Camagru just received a new comment<br>'.'http://localhost:8081/Gallery/single_pic/'.$id_gallery
+                );
+            }
 		}
 		catch (PDOException $e)
 		{
 			echo $e->getMessage();
 		}
     }
-    
+
     public function new_like($id_gallery, $id_user_given){
         $new = array(
             'id_gallery' => $id_gallery,

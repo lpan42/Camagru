@@ -11,7 +11,7 @@ class UserManager
         $lowercase = preg_match('@[a-z]@', $password);
         $number    = preg_match('@[0-9]@', $password);
         if(!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
-            throw new UserException('Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.');
+            throw new UserException('Password should be at least 8 characters in length and should include at least one upper case letter, one number.');
         }
     }
 
@@ -45,7 +45,7 @@ class UserManager
             EmailSender::send(
                 $user['email'], 
                 'Active your account before login Camegru', 
-                'localhost:8081/Login/'.$user['username'].'/'.$user['hash_active']
+                'http://localhost:8081/Login/'.$user['username'].'/'.$user['hash_active']
             );
             
         }
@@ -145,7 +145,7 @@ class UserManager
             EmailSender::send(
                 $emailadd, 
                 'Reset your password on Camegru', 
-                'localhost:8081/Modify/'.$user.'/'.$reset_email['hash_pwd']
+                'http://localhost:8081/Modify/'.$user.'/'.$reset_email['hash_pwd']
             );
             
         }
@@ -159,9 +159,12 @@ class UserManager
         if ($new_pwd != $new_pwd_repeat){
             throw new UserException('New password mismatch.');
         }
-        $this->auth_pwd($password);
+        $this->auth_pwd($new_pwd);
         try{
-            $hash_new_pwd = array('password' => $this->passwordHash($new_pwd));
+            $hash_new_pwd = array(
+                'password' => $this->passwordHash($new_pwd),
+                'hash_pwd' => NULL
+        );
             Db::update('users', $hash_new_pwd, 'WHERE username = ?', array($username));
         }
        catch (PDOException $e)
@@ -195,6 +198,55 @@ class UserManager
         }
     }
     
+    public function modif_username($old_name, $new_name, $new_name_repeat)
+    {
+        if ($new_name != $new_name_repeat){
+            throw new UserException('New username mismatch.');
+        }
+        $username = $this->getUsername();
+        if($old_name != $username){
+            throw new UserException('Old username is different with current login user.');
+        }
+        if(strlen($new_name) < 3 || strlen($new_name) > 15){
+            throw new UserException('Username should have at least 3 and no more than 15 characters.');
+        }
+        $checkUsername = Db::query('SELECT id_user FROM users WHERE username = ?;', array($new_name));
+        if($checkUsername){
+            throw new UserException('This username has already been taken.');
+        }
+        try{
+            $new_username = array('username' => $new_name);
+            Db::update('users', $new_username, 'WHERE username = ?', array($username));
+        }
+        catch (PDOException $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+
+    public function modif_eadd($old_eadd, $new_eadd, $new_eadd_repeat)
+    {
+        if ($new_eadd != $new_eadd_repeat){
+            throw new UserException('New email mismatch.');
+        }
+        $username = $this->getUsername();
+        if($old_eadd != $_SESSION['email']){
+            throw new UserException('Old email is different with current login user.');
+        }
+        $checkEmail = Db::query('SELECT id_user FROM users WHERE email = ?;', array($new_eadd));
+        if($checkEmail){
+            throw new UserException('This email has already been taken.');
+        }
+        try{
+            $new_email = array('email' => $new_eadd);
+            Db::update('users', $new_email, 'WHERE username = ?', array($username));
+        }
+        catch (PDOException $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+
     public function getCurrentPrefer($username)
     {
 		try{
@@ -241,5 +293,20 @@ class UserManager
         return null;
     }
 
+    public function get_post_username($id_gallery){
+        try{
+            $user = Db::queryOne(
+            'SELECT `username`
+            FROM `users` JOIN `gallery`
+            on `gallery`.`id_user` = `users`.`id_user`
+            WHERE `gallery`.`id_gallery` =?', array($id_gallery));
+            return ($user);
+        }
+        catch (PDOException $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+    
 }
 ?>

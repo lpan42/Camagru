@@ -4,8 +4,8 @@ class ModifyController extends Controller
     public function process($args)
     {
         $userManager = new UserManager();
-        if($args[0] == 'email-prefer'){
-		   $this->emailprefer();
+        if($args[0] == 'my_profile'){
+		   $this->my_profile();
 	    }
 	    else if($args[0] == 'password'){
 		   $this->modify_pwd();
@@ -43,6 +43,60 @@ class ModifyController extends Controller
         }
     }
 
+    public function my_profile()
+	{
+        $userManager = new UserManager();
+        $this->head['title'] = 'Manage my profile';
+        $user = $userManager->getUsername();
+        $current = $userManager->getCurrentPrefer($user);
+        $this->data['current'] = $current['email_prefer'];
+        if ($_POST['comfirm_name'])
+        {
+            try
+            {
+                $userManager->modif_username($_POST['old_name'], $_POST['new_name'], $_POST['new_name_repeat']);
+                session_unset();
+                $this->addMessage('Your username has been changed, you may relogin now');
+                $this->redirect('login');
+              
+            }
+            catch (UserException $ex)
+            {
+                $this->addMessage($ex->getMessage());
+            }
+        }
+        if ($_POST['comfirm_eadd'])
+        {
+            try
+            {
+                $userManager->modif_eadd($_POST['old_eadd'], $_POST['new_eadd'], $_POST['new_eadd_repeat']);
+                session_unset();
+                $this->addMessage('Your email address has been changed, you may relogin now');
+                $this->redirect('login');
+              
+            }
+            catch (UserException $ex)
+            {
+                $this->addMessage($ex->getMessage());
+            }
+        }
+        if ($_POST['comfirm_pwd'])
+        {
+            try
+            {
+                $userManager->modif_pwd($_POST['old_pwd'], $_POST['new_pwd'], $_POST['new_pwd_repeat']);
+                session_unset();
+                $this->addMessage('Your password has been changed, you may login with your new password');
+                $this->redirect('login');
+            }
+            catch (UserException $ex)
+            {
+                $this->addMessage($ex->getMessage());
+            }
+        }
+        $this->view = 'my_profile';
+    }
+
     public function reset_pwd(){
         if($_POST){
             $userManager = new UserManager();
@@ -59,16 +113,6 @@ class ModifyController extends Controller
         }
        $this->view = 'forgetpwd';
     }
-       
-	public function emailprefer()
-	{
-        $userManager = new UserManager();
-        $this->head['title'] = 'Change Email Perference';
-        $user = $userManager->getUsername();
-        $current = $userManager->getCurrentPrefer($user);
-        $this->data['current'] = $current['email_prefer'];
-        $this->view = 'modif_email';
-    }
     
 	public function modify_emailprefer(){
         $userManager = new UserManager();
@@ -83,25 +127,5 @@ class ModifyController extends Controller
         }
     }
 
-	public function modify_pwd()
-	{
-		$userManager = new UserManager;
-        $this->head['title'] = 'Change password';
-        if ($_POST)
-        {
-            try
-            {
-                $userManager->modif_pwd($_POST['old_pwd'], $_POST['new_pwd'], $_POST['new_pwd_repeat']);
-                $this->addMessage('Your password has been changed, you may login with your new password');
-                session_unset();
-                $this->redirect('login');
-            }
-            catch (UserException $ex)
-            {
-                $this->addMessage($ex->getMessage());
-            }
-        }
-        $this->view = 'modif_pwd';
-    }
 }
 ?>

@@ -14,9 +14,9 @@
                     <button class="cancel">Cancel</button>
                 </div>
                 <div class="share_choice">
-                    <a href="#" class="fa fa-facebook"></a>
-                    <a href="#" class="fa fa-twitter"></a>
-                    <a href="#" class="fa fa-instagram"></a>
+                    <a href="#" class="fa fa-facebook fa-2x"></a>
+                    <a href="#" class="fa fa-twitter fa-2x"></a>
+                    <a href="#" class="fa fa-instagram fa-2x"></a>
                     <button class="cancel">Cancel</button>
                 </div>
             </div>

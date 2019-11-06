@@ -25,7 +25,7 @@ if ($check = document.getElementById("submit_comment")) {
                         const newComment = document.createElement("P");
                         newComment.className = "comment_info";
                         const a = document.createElement("A");
-                        const linkText = document.createTextNode("[" + text.trim() + "]");
+                        const linkText = document.createTextNode("[" + text.trim() + "] ");
                         a.appendChild(linkText);
                         a.href = "#";
                         newComment.appendChild(a);

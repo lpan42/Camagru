@@ -41,6 +41,7 @@ button {
     color: white;
     font-size: inherit;
     padding: 6px 15px;
+    margin: 5px 0px;
     text-decoration: none;
 }
 
@@ -71,6 +72,10 @@ footer {
 
 
 /********** NAV & FOOTER **********/
+
+.my_profile {
+    padding-bottom: 25px;
+}
 
 #nav_bar {
     padding: 10px;
@@ -176,6 +181,26 @@ input:checked+.slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
+}
+
+.fa-envelope {
+    color: #f78b6a;
+    padding: 5px;
+}
+
+.fa-key {
+    color: #f78b6a;
+    padding: 5px;
+}
+
+.fa-user {
+    color: #f78b6a;
+    padding: 5px;
+}
+
+.fa-bell {
+    color: #f78b6a;
+    padding: 5px;
 }
 
 
@@ -306,7 +331,7 @@ border-radius: 50%;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    width: 50vw;
+    width: 80vw;
     height: 80vh;
     overflow: auto;
     margin: auto;
@@ -322,7 +347,7 @@ border-radius: 50%;
 }
 
 .img-item {
-    width: 400px;
+    width: 500px;
     margin: 5px;
     position: relative;
 }
@@ -422,7 +447,6 @@ border-radius: 50%;
 }
 
 .share_choice {
-    color: white;
     text-align: center;
     background: #f5a49099;
     position: absolute;
@@ -433,31 +457,32 @@ border-radius: 50%;
     display: none;
 }
 
-.fa {
-    padding: 20px;
-    font-size: 20px;
-    width: 30px;
-    text-align: center;
-    text-decoration: none;
-    margin: 5px 2px;
-    border-radius: 50%;
-}
-
-.fa:hover {
-    opacity: 0.7;
-}
-
 .fa-facebook {
-    background: #3B5998;
+    padding: 25px;
     color: white;
+}
+
+.fa-facebook:hover {
+    color: #3B5998;
+    opacity: 1;
 }
 
 .fa-twitter {
-    background: #55ACEE;
+    padding: 25px;
     color: white;
 }
 
+.fa-twitter:hover {
+    opacity: 1;
+    color: #55ACEE;
+}
+
 .fa-instagram {
-    background: #f40083;
+    padding: 25px;
     color: white;
+}
+
+.fa-instagram:hover {
+    opacity: 1;
+    color: #f40083;
 }

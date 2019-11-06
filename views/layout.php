@@ -32,14 +32,8 @@
 					<li><a href="Register">Register</a></li>
 				<?php elseif($_SESSION['username']):?>
 					<li>Welcome, <?=$_SESSION['username']?></li>
-					<div class="dropdown">
-					<li class="dropbtn" id ="my_account">My account</li>
-						<div class="dropdown-content">
-							<a href="Gallery/user_gallery/<?=$_SESSION['id_user']?>">My Gallery</a>
-							<a href="modify/password">Change Password</a>
-							<a href="modify/email-prefer">Email Preference</a>
-						</div>
-					</div>
+					<li><a href="Gallery/user_gallery/<?=$_SESSION['id_user']?>">My Gallery</a></li>
+					<li><a href="modify/my_profile">My Account</a></li>
 					<li><a href="Logout">Logout</a></li>
 			</ul>			
 			<?php endif?>
