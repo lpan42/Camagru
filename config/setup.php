@@ -18,13 +18,6 @@ try{
         `admin` BOOLEAN DEFAULT FALSE
     );";
 
-    // $query_imgs = "CREATE TABLE IF NOT EXISTS `imgs`(
-    //     `id_img` INT AUTO_INCREMENT PRIMARY KEY,
-    //     `id_user` INT NOT NULL,
-    //     `path` VARCHAR(500) NOT NULL,
-    //     `creation_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-    // );";
-
     $query_likes = "CREATE TABLE IF NOT EXISTS `likes`(
         `id_like` INT AUTO_INCREMENT PRIMARY KEY,
         `id_gallery` INT NOT NULL,
@@ -90,6 +83,7 @@ try{
 
 
     echo "Database $DB_NAME has been built successfully <br>";
+    // echo '<a href="Gallery">Camagru</a>';
     }
     catch(PDOException $e){
         echo $e->getMessage();

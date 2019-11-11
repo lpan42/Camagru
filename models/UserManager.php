@@ -44,10 +44,9 @@ class UserManager
             Db::insert('users', $user);
             EmailSender::send(
                 $user['email'], 
-                'Active your account before login Camegru', 
-                'http://localhost:8081/Login/'.$user['username'].'/'.$user['hash_active']
+                'Active your account on Camegru',
+                '<a href="http://localhost:8081/Login/'.$user['username'].'/'.$user['hash_active'].'"></a>'
             );
-            
         }
         catch (PDOException $e)
         {

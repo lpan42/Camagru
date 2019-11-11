@@ -72,7 +72,8 @@ class GalleryManager
                 EmailSender::send(
                     $post_user['email'], 
                     'You picture on Camagru just received a new comment', 
-                    'You picture on Camagru just received a new comment<br>'.'http://localhost:8081/Gallery/single_pic/'.$id_gallery
+                    'You picture on Camagru just received a new comment<br>'.
+                    '<a href="http://localhost:8081/Gallery/single_pic/'.$id_gallery.'"></a>'
                 );
             }
 		}

@@ -15,7 +15,7 @@ class Db
                 self::$connection = new PDO($dsn,$user,$password,self::$settings);
             }
             catch(PDOException $e){
-                echo $e->getMessage();
+               echo $e->getMessage();
             }
         }
     }

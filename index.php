@@ -19,8 +19,14 @@ function autoloadFunction($class)
 spl_autoload_register("autoloadFunction");// Register given function as __autoload() implementation
 
 //echo $DB_DSN;
-Db::connect($DB_DSN, $DB_USER, $DB_PASSWORD);
-
+try{
+    Db::connect($DB_DSN, $DB_USER, $DB_PASSWORD);
+}
+catch(UserException $ex){
+    echo $e->getMessage();
+    // echo "<br />";
+    // echo '<a href="config/setup.php">setup</a>';
+}
 $router = new RouterController();
 $router->process(array($_SERVER['REQUEST_URI']));
 $router->renderView();
