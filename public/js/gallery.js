@@ -17,7 +17,7 @@ var container = document.getElementsByClassName("img-container")[0];
 let offset_nbr = 0;
 // Detect when scrolled to bottom and add 6 more pics.
 container.addEventListener('scroll', function() {
-    if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+    if (container.scrollTop + container.clientHeight == container.scrollHeight) {
         offset_nbr += 6;
         fetch('Gallery/pagination', {
             method: 'POST',

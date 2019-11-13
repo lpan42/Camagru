@@ -105,8 +105,7 @@ class NewpostController extends Controller
         $target_dir = "public/gallery/";
         $name = $this->name_file();
         $data = trim(file_get_contents('php://input'));
-        $encoded = json_decode($data, TRUE);
-        if(copy($encoded, $target_dir.$name)){
+        if(copy($data, $target_dir.$name)){
             try
             {
                 $new_post = new NewPost();
@@ -114,23 +113,19 @@ class NewpostController extends Controller
                     'id_user' => $_SESSION['id_user'],
                     'path' => $target_dir.$name,
                     );
-                $new_post->post_picture($post);
-                unlink($encoded);
-                echo "You picture has been posted, want to post aother one?";
+                $id_gallery = $new_post->post_picture($post);
+                unlink($data);
+                echo json_encode($id_gallery['id_gallery']); 
             }
             catch (UserException $e)
             {  
-                echo "Sorry fail to post, try again?"; 
+                echo json_encode(0); 
             }
            
         }
         else{
-            echo "Sorry fail to post, try again?";
+            echo json_encode(0); 
         }
-        // $encoded = json_decode($data, TRUE);
-        
-        // var_dump($post);
-        // 
     }
 }
 ?>

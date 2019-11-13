@@ -58,7 +58,7 @@ class GalleryManager
         $new = array(
             'id_gallery' => $id_gallery,
             'id_user_given' => $id_user_given,
-            'comment' => $comment
+            'comment' => htmlspecialchars($comment)
         );
         try{
             Db::insert('comments', $new);
@@ -73,7 +73,7 @@ class GalleryManager
                     $post_user['email'], 
                     'You picture on Camagru just received a new comment', 
                     'You picture on Camagru just received a new comment<br>'.
-                    '<a href="http://localhost:8081/Gallery/single_pic/'.$id_gallery.'"></a>'
+                    '<a href="'.'http://localhost:8081/Gallery/single_pic/'.$id_gallery.'">Check my new comment</a>'
                 );
             }
 		}

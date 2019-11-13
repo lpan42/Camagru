@@ -11,12 +11,24 @@ class UserManager
         $lowercase = preg_match('@[a-z]@', $password);
         $number    = preg_match('@[0-9]@', $password);
         if(!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
-            throw new UserException('Password should be at least 8 characters in length and should include at least one upper case letter, one number.');
+            throw new UserException('Password should be at least 8 characters in length and should include at least one upper case letter, one lower case letter and one number.');
         }
     }
 
     public function register($email, $username, $password, $password_repeat)
     {
+        $escape_username =  htmlspecialchars($username);
+        $escape_email =  htmlspecialchars($email);
+        if ($escape_username !== $username)
+        {
+            throw new UserException('Invalid username');
+        }
+        if ($escape_email !== $email)
+        {
+            throw new UserException('Invalid email');
+        }
+        $username = $escape_username;
+        $email = $escape_email;
         if ($password != $password_repeat){
             throw new UserException('Password mismatch.');
         }
@@ -38,14 +50,16 @@ class UserManager
             'password' => $this->passwordHash($password),
             'hash_active' => hash('md5', rand())
         );
-        echo 'localhost:8081/Login/'.$user['username'].'/'.$user['hash_active'];//
+        // echo 'localhost:8081/Login/'.$user['username'].'/'.$user['hash_active'];//
         try
         {
             Db::insert('users', $user);
             EmailSender::send(
                 $user['email'], 
                 'Active your account on Camegru',
-                '<a href="http://localhost:8081/Login/'.$user['username'].'/'.$user['hash_active'].'"></a>'
+                'You account on Camagru has been successfully created, click the link to active<br>'
+                .'<a href="'.'http://localhost:8081/Login/'.$user['username'].'/'.$user['hash_active']
+                .'">activate my account</a>'
             );
         }
         catch (PDOException $e)
@@ -78,6 +92,7 @@ class UserManager
 
     public function login($login, $password)
     {
+       
         $email = Db::queryOne('
             SELECT id_user, email, username, password, active, email_prefer, admin
             FROM users
@@ -136,7 +151,7 @@ class UserManager
         $reset_email = array(
             'hash_pwd' => hash('md5', rand())
         );
-        echo 'localhost:8081/Modify/'.$user.'/'.$reset_email['hash_pwd'];//
+        // echo 'localhost:8081/Modify/'.$user.'/'.$reset_email['hash_pwd'];//
         try
         {
             Db::update('users', $reset_email, 'WHERE username = ?', array($user));
@@ -144,7 +159,8 @@ class UserManager
             EmailSender::send(
                 $emailadd, 
                 'Reset your password on Camegru', 
-                'http://localhost:8081/Modify/'.$user.'/'.$reset_email['hash_pwd']
+                'You request to reset your password on Camagru, click the link to finish resetting<br>'
+                .'<a href="'.'http://localhost:8081/Modify/'.$user.'/'.$reset_email['hash_pwd'].'">reset my password</a>'
             );
             
         }
@@ -177,7 +193,7 @@ class UserManager
         if ($new_pwd != $new_pwd_repeat){
             throw new UserException('New password mismatch.');
         }
-        $this->auth_pwd($password);
+        $this->auth_pwd($new_pwd);
         $username = $this->getUsername();
         $ver_old = Db::queryOne('
             SELECT password
@@ -199,6 +215,12 @@ class UserManager
     
     public function modif_username($old_name, $new_name, $new_name_repeat)
     {
+        $escape_username =  htmlspecialchars($new_name);
+        if ($escape_username !== $new_name)
+        {
+            throw new UserException('Invalid username');
+        }
+        $new_name = $escape_username;
         if ($new_name != $new_name_repeat){
             throw new UserException('New username mismatch.');
         }
@@ -225,6 +247,12 @@ class UserManager
 
     public function modif_eadd($old_eadd, $new_eadd, $new_eadd_repeat)
     {
+        $escape_email =  htmlspecialchars($new_eadd);
+        if ($escape_email !== $new_eadd)
+        {
+            throw new UserException('Invalid email');
+        }
+        $new_eadd = $escape_email;
         if ($new_eadd != $new_eadd_repeat){
             throw new UserException('New email mismatch.');
         }

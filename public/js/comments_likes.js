@@ -33,8 +33,8 @@ if ($check = document.getElementById("submit_comment")) {
                         newComment.appendChild(textnode);
                         const list = document.getElementById("comments_div");
                         list.insertBefore(newComment, list.childNodes[0]);
-                        const addOne = parseInt(document.getElementById("comment_nbr").innerHTML) + 1;
-                        document.getElementById("comment_nbr").innerHTML = addOne;
+                        const addOne = parseInt(document.getElementById("comment_nbr").innerText) + 1;
+                        document.getElementById("comment_nbr").innerText = addOne;
                         document.getElementById("comment_icon").src = "public/icons/comment_icon.png";
                         textarea = document.getElementById("new_comment").value = "";
                     }
@@ -63,8 +63,8 @@ document.getElementById("like_icon").addEventListener("click", function(e) {
                     return;
                 } else {
                     document.getElementById("like_icon").src = "public/icons/like_icon.png";
-                    var addOne = parseInt(document.getElementById("likes_nbr").innerHTML) + 1;
-                    document.getElementById("likes_nbr").innerHTML = addOne;
+                    var addOne = parseInt(document.getElementById("likes_nbr").innerText) + 1;
+                    document.getElementById("likes_nbr").innerText = addOne;
                 }
             });
         });
@@ -78,8 +78,8 @@ document.getElementById("like_icon").addEventListener("click", function(e) {
                 return;
             } else {
                 document.getElementById("like_icon").src = "public/icons/like_icon_b.png";
-                var minOne = parseInt(document.getElementById("likes_nbr").innerHTML) - 1;
-                document.getElementById("likes_nbr").innerHTML = minOne;
+                var minOne = parseInt(document.getElementById("likes_nbr").innerText) - 1;
+                document.getElementById("likes_nbr").innerText = minOne;
             }
         });
     }

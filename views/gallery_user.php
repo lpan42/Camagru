@@ -1,11 +1,11 @@
 <div class="gallery_div">
     <p id="username"><?=$user_gallery[0]['username']?>'s Gallery
-    <div class="img-container-single">
+    <div class="img-container">
         <?php foreach($user_gallery as $gallery):?>
             <div class="img-item">
                 <a href="Gallery/single_pic/<?=$gallery['id_gallery']?>"><img class="gallery_pic" src="<?=$gallery['path']?>" alt="<?=$gallery['id_gallery']?>"></a>
                 <?php if($user_gallery[0]['id_user'] == $_SESSION['id_user']):?>
-                    <button class="delete_btn"id="<?=$gallery['id_gallery']?>">Delete</button>
+                    <button class="delete_btn"id="delete_btn<?=$gallery['id_gallery']?>">Delete</button>
                     <button class="share_btn" id="<?=$gallery['id_gallery']?>">Share</button>
                 <?php endif;?>
                 <div class="delete_comfirm">
@@ -24,53 +24,4 @@
     </div>
 </div>
 
-<script>
-    document.getElementsByClassName("img-container-single")[0].addEventListener('click', (event) => {
-        const delete_btns = document.getElementsByClassName('delete_btn');
-        [...delete_btns].forEach((btn) => {
-            if (btn == event.target)
-            {
-                const delete_conf = btn.parentNode.getElementsByClassName("delete_comfirm")[0];
-                delete_conf.style.display="inline";
-                btn.style.display="none";
-                const cancel = delete_conf.getElementsByClassName("cancel")[0];
-                cancel.onclick = () => {
-                    delete_conf.style.display = "none"; 
-                    btn.style.display="inline";
-                }
-                const yes = delete_conf.getElementsByClassName("yes")[0];
-                yes.onclick = () => {
-                    fetch('Gallery/delete/picture', {
-                        method: 'POST',
-                        body: btn.id,
-                    }).then(function(response){
-                        if (response.status !== 200) {
-                            alert('Looks like there was a problem. Status Code: '.response.status);
-                            return;
-                        }
-                        else{
-                            btn.parentNode.parentNode.removeChild(btn.parentNode);
-                        }
-                    });
-                }
-            }
-        })
-    })    
-
-    document.getElementsByClassName("img-container-single")[0].addEventListener('click', (event) => {
-        const share_btns = document.getElementsByClassName('share_btn');
-        [...share_btns].forEach((btn) => {
-            if (btn == event.target)
-            {
-                const share_choice = btn.parentNode.getElementsByClassName("share_choice")[0];
-                share_choice.style.display="inline";
-                btn.style.display="none";
-                const cancel = share_choice.getElementsByClassName("cancel")[0];
-                cancel.onclick = () => {
-                    share_choice.style.display = "none";
-                    btn.style.display="inline";
-                }
-            }
-        })
-    });
-</script>
+<script type="text/javascript" src="/public/js/gallery_user.js"></script>

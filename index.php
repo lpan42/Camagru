@@ -1,6 +1,6 @@
 <?php
 require_once 'config/database.php';
-// require_once 'config/setup.php';
+require_once 'config/setup.php';
 
 session_start();
 mb_internal_encoding("UTF-8");
@@ -17,18 +17,8 @@ function autoloadFunction($class)
     }
 }
 spl_autoload_register("autoloadFunction");// Register given function as __autoload() implementation
-
-//echo $DB_DSN;
-try{
-    Db::connect($DB_DSN, $DB_USER, $DB_PASSWORD);
-}
-catch(UserException $ex){
-    echo $e->getMessage();
-    // echo "<br />";
-    // echo '<a href="config/setup.php">setup</a>';
-}
+Db::connect($DB_DSN, $DB_USER, $DB_PASSWORD);
 $router = new RouterController();
 $router->process(array($_SERVER['REQUEST_URI']));
 $router->renderView();
-//session_unset();
 ?>  

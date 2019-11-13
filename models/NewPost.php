@@ -24,14 +24,11 @@ class NewPost
     public function post_picture($post)
     {
         Db::insert('gallery', $post);
+        $id_gallery = Db::queryOne(
+            'SELECT `id_gallery` 
+            FROM `gallery` 
+            WHERE `path`= ?;', array($post["path"]));
+        return $id_gallery;
     }
-    // public function changeImagetoBase64($image){
-    //     $path = $image;
-    //     $type = pathinfo($path, PATHINFO_EXTENSION);
-    //     $data = file_get_contents($path);
-    //     $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-    //     return $base64;
-    // }
-
 }
 ?>

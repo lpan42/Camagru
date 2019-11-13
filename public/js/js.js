@@ -13,6 +13,10 @@ for (let i = 0; i < ii.length; i++) {
     });
 }
 
+function change_size(event) {
+    console.log("test");
+}
+
 function render() {
     context_s.clearRect(0, 0, canvas_s.width, canvas_s.height);
     layers.forEach((layer) => {
@@ -39,7 +43,7 @@ function drawDragAnchor(x, y) {
 
 function add_layer(url, pos, size) {
     const { x, y } = pos;
-    const { w, h } = size;
+    let { w, h } = size;
     const img = new Image();
     img.src = url;
     img.onload = function() {
@@ -56,21 +60,51 @@ canvas_s.addEventListener('mousedown', function({ clientX, clientY }) {
         canvas_s.style.cursor = "grab";
         layer.dragging = { x: px - layer.pos.x, y: py - layer.pos.y };
         selected = layer;
+        if (px > layer.pos.x + layer.size.w - 8 && px < layer.pos.x + layer.size.w + 8 && py > layer.pos.y + layer.size.h - 8 && py < layer.pos.y + layer.size.h + 8) {
+            canvas_s.style.cursor = "nwse-resize";
+            layer.resizing = true;
+        } else
+            layer.resizing = false;
     } else {
         canvas_s.style.cursor = "default";
         selected = null;
+
     }
 
 })
 
-canvas_s.addEventListener('mousemove', function({ clientX, clientY }) {
+canvas_s.addEventListener('mousemove', function(event) {
+    const { clientX, clientY } = event;
     const rect = canvas_s.getBoundingClientRect();
     const px = clientX - rect.left;
     const py = clientY - rect.top;
     const layer = layers.find(({ dragging }) => dragging !== false);
     if (layer) {
-        layer.pos.x = px - layer.dragging.x;
-        layer.pos.y = py - layer.dragging.y;
+        if (layer.resizing) {
+            // console.log(px, py);
+            // console.log(layer.pos.x, layer.pos.y);
+            // console.log(px - layer.pos.x, py - layer.pos.y);
+            if (layer.size.w >= 20 && layer.size.h >= 20) {
+                layer.size.w += event.movementX;
+                layer.size.h += event.movementY;
+            } else {
+                layer.size.w = 20;
+                layer.size.h = 20;
+            }
+        } else {
+            layer.pos.x = px - layer.dragging.x;
+            layer.pos.y = py - layer.dragging.y;
+        }
+    }
+
+    const selected_layer = layers.find((l) => l === selected);
+    if (selected_layer) {
+        canvas_s.style.cursor = "grab";
+        if (px > selected_layer.pos.x + selected_layer.size.w - 8 && px < selected_layer.pos.x + selected_layer.size.w + 8 && py > selected_layer.pos.y + selected_layer.size.h - 8 && py < selected_layer.pos.y + selected_layer.size.h + 8) {
+            canvas_s.style.cursor = "nwse-resize";
+        }
+    } else {
+        canvas_s.style.cursor = "default";
     }
 });
 
@@ -100,7 +134,6 @@ canvas_s.addEventListener('dblclick', function({ clientX, clientY }) {
 //check sticker when press post btn and merge img
 document.getElementById("btn_merge").addEventListener("click", function() {
     const canvas = document.getElementById("canvas_bg");
-    // console.log(canvas);
     if (layers.length === 0) {
         alert("A sticker is a must-have");
     } else {
@@ -142,22 +175,44 @@ document.getElementById("btn_merge").addEventListener("click", function() {
 document.getElementById("btn_post").addEventListener("click", function() {
     const final_img = document.getElementById("final_img");
     let data = final_img.src;
-    data = JSON.stringify(data);
     data = data.replace(window.location.origin + "/", '');
-    // console.log(data);
     fetch('Newpost/post_pic', {
             method: 'POST',
             body: data,
         })
         .then((response) => response.text()).then((text) => {
-            var para = document.createElement("P");
+            text = JSON.parse(text);
+            const para = document.createElement("P");
             para.id = "post_response";
-            para.innerHTML = text;
-            var div = document.getElementById("post_again");
+            if (text == 0) {
+                para.innerHTML = "Sorry fail to post, try again?";
+            } else {
+                para.innerHTML = "You picture has been posted, want to post aother one?";
+            }
+            const div = document.getElementById("post_again");
             div.prepend(para);
             div.style.display = "block";
             document.getElementById("final_preview").style.display = "none";
             document.getElementById("btn_post").style.display = "none";
             document.getElementById("btn_redo").style.display = "none";
+
+            const pre_pic = document.getElementsByClassName("aside aside-2")[0];
+            if (document.getElementsByClassName("prepic")[0]) {
+                const img = document.createElement("IMG");
+                img.className = "prepic";
+                img.id = "gallery" + text;
+                img.src = data;
+                img.alt = text;
+                pre_pic.insertBefore(img, pre_pic.childNodes[0]);
+            } else {
+                document.getElementsByTagName("P")[1].style.display = "none";
+                const img = document.createElement("IMG");
+                img.className = "prepic";
+                img.id = "gallery" + text;
+                img.src = data;
+                img.alt = text;
+                pre_pic.insertBefore(img, pre_pic.childNodes[0]);
+            }
+
         });
 });;

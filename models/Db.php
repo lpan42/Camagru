@@ -1,4 +1,6 @@
 <?php
+require_once 'config/setup.php';
+require_once 'config/database.php';
 class Db
 {
     private static $connection;
@@ -13,9 +15,10 @@ class Db
         {
             try{
                 self::$connection = new PDO($dsn,$user,$password,self::$settings);
+
             }
             catch(PDOException $e){
-               echo $e->getMessage();
+                setup_db();
             }
         }
     }
@@ -37,6 +40,9 @@ class Db
     // Executes a query and returns the number of affected rows
 	public static function query($query, $args = array())
 	{
+        foreach ($args as $key => $v) {
+            $args[$key] = htmlspecialchars($v);
+        }
 		$result = self::$connection->prepare($query);
 		$result->execute($args);
 		return $result->rowCount();

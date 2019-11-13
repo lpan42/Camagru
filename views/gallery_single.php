@@ -1,4 +1,4 @@
-<div class="img-container-single">
+<div class="img-container">
     <div class="single_pic">
         <a href="Gallery/user_gallery/<?=$single_pic[0]['id_user']?>"><p id="username"><?=$single_pic[0]['username']?></p></a>
         <p id="creation_date"><?=$single_pic[0]['creation_date']?></p>
@@ -32,7 +32,7 @@
             <?php endif?>
             <div id="comments_div">
                 <?php foreach ($comments as $comment) : ?>
-                    <p class="comment_info"><b>[<a href="Gallery/user_gallery/<?=$comment['id_user_given']?>"><?=$comment['username']?></a>] </b><?=$comment['comment']?></p>
+                    <p class="comment_info"><b>[<a href="Gallery/user_gallery/<?=$comment['id_user_given']?>"><?=$comment['username']?></a>] </b><?= htmlspecialchars($comment['comment'])?></p>
                 <?php endforeach ?>
             </div>
         </div>

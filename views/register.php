@@ -10,5 +10,5 @@
     <input type="password" name="password" /><br />
     Password repeat<br />
     <input type="password" name="password_repeat" /><br />
-    <input type="submit" value="Register" />
+    <button type="submit" value="Register">Register</button>
 </form>
