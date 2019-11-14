@@ -92,9 +92,9 @@ class UserManager
 
     public function login($login, $password)
     {
-       
+      
         $email = Db::queryOne('
-            SELECT id_user, email, username, password, active, email_prefer, admin
+            SELECT id_user, email, username, password, active, email_prefer
             FROM users
             WHERE email = ?;', array($login));
         if($email)//if the login use email
@@ -110,7 +110,7 @@ class UserManager
         else if(!$email)//if the login use username
         {
             $username = Db::queryOne('
-                SELECT id_user, email, username, password, active, email_prefer, admin
+                SELECT id_user, email, username, password, active, email_prefer
                 FROM users
                 WHERE username = ?;', array($login));
             if (!$username || !password_verify($password, $username['password']))
@@ -126,22 +126,30 @@ class UserManager
     public function forget_pwd($login)
     {
         $email = Db::queryOne('
-            SELECT id_user, email, username, password, active, email_prefer, admin
+            SELECT id_user, email, username, password, active, email_prefer
             FROM users
             WHERE email = ?;', array($login));
         if($email)//if the login use email
         {
-            $emailadd = $email['email'];
-            $user = $email['username'];
+            if($email['active'] == 1){
+                $emailadd = $email['email'];
+                $user = $email['username'];
+            }
+            else{
+                throw new UserException('Your account has not been actived yet.');
+            }
         }
         else if(!$email)//if the login use username
         {
             $username = Db::queryOne('
-                SELECT id_user, email, username, password, active, email_prefer, admin
+                SELECT id_user, email, username, password, active, email_prefer
                 FROM users
                 WHERE username = ?;', array($login));
             if (!$username){
                 throw new UserException('Invalid username or password.');
+            }
+            if($username['active'] !== 1){
+                throw new UserException('Your account has not been actived yet.');
             }
             else{
                 $emailadd = $username['email'];

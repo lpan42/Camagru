@@ -44,6 +44,7 @@ if ($check = document.getElementById("submit_comment")) {
     })
 }
 
+// like and unlike
 document.getElementById("like_icon").addEventListener("click", function(e) {
     let icon = document.getElementById("like_icon").src;
     icon = icon.replace(window.location.origin + "/", '');
@@ -84,3 +85,13 @@ document.getElementById("like_icon").addEventListener("click", function(e) {
         });
     }
 })
+
+//share to twiter
+document.getElementById('share_btn').addEventListener('click', (event) => {
+    event.preventDefault();
+    url = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(document.URL);
+    var top = (screen.height - 500) / 2;
+    var left = (screen.width - 500) / 2;
+    var params = "menubar=no,toolbar=no,status=no,width=500,height=500,top=" + top + ",left=" + left;
+    window.open(url, "NewWindow", params);
+});

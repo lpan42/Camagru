@@ -54,7 +54,7 @@ class Db
 		array_values($args));
 	}
     
-    public static function update($table, $values = array(), $condition, $args = array()) //  Db::update('article', $article, 'WHERE article_id = ?', array($id));
+    public static function update($table, $values = array(), $condition, $args = array())
 	{
 		return self::query("UPDATE `$table` SET `".implode('` = ?, `', array_keys($values))."` = ? " . $condition,
 			array_merge(array_values($values), $args));

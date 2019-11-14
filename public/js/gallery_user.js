@@ -27,20 +27,3 @@ document.getElementsByClassName("img-container")[0].addEventListener('click', (e
         }
     })
 })
-
-document.getElementsByClassName("img-container")[0].addEventListener('click', (event) => {
-    const share_btns = document.getElementsByClassName('share_btn');
-    [...share_btns].forEach((btn) => {
-        if (btn == event.target) {
-            id = btn.id;
-            const share_choice = btn.parentNode.getElementsByClassName("share_choice")[0];
-            share_choice.style.display = "inline";
-            btn.style.display = "none";
-            const cancel = share_choice.getElementsByClassName("cancel")[0];
-            cancel.onclick = () => {
-                share_choice.style.display = "none";
-                btn.style.display = "inline";
-            }
-        }
-    })
-});

@@ -8,7 +8,6 @@ date_default_timezone_set('UTC');
 
 function autoloadFunction($class)
 {
-    //echo $class;
     if (preg_match('/Controller$/', $class)){
         require(__DIR__."/controllers/" . $class . ".php");
     }

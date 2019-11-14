@@ -4,6 +4,7 @@
         <p id="creation_date"><?=$single_pic[0]['creation_date']?></p>
         <hr>
         <img class="single_picture" id="<?=$single_pic[0]['id_gallery']?>" src="<?=$single_pic[0]['path']?>" alt="<?=$single_pic[0]['id_gallery']?>">
+        <button id="share_btn">Share one Twitter</button>
     </div>
     
     <div class="comments_likes">
@@ -39,4 +40,4 @@
     </div>
 </div>
 
-<script type="text/javascript" src="/public/js/comments_likes.js"></script>
+<script type="text/javascript" src="/public/js/gallery_single.js"></script>

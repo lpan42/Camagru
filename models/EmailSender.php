@@ -1,8 +1,6 @@
 <?php
 class EmailSender
 {
-    // Sends an HTML email. You can use basic HTML tags. You have to insert
-    // new lines using <br /> or paragraphs. Uses the UTF-8 encoding.
     public static function send($recipient, $subject, $message)
     {
         $header = "From: ashley.lepan@gmail.com";

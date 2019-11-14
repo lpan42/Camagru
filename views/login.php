@@ -1,7 +1,7 @@
 <h1>Login to your account</h1>
 <form method="post">
     Login<br />
-    <input type="text" name="login" /><br />
+    <input type="text" name="login" placeholder="Email or Username"/><br />
     Password<br />
     <input type="password" name="password" /><br/>
    <button type="submit" value="Login">Login</button>

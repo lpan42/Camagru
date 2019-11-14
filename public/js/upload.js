@@ -1,7 +1,7 @@
 document.getElementById("fileToUpload").addEventListener("change", function(e) {
     e.preventDefault();
     const fd = new FormData();
-    const files = $('#fileToUpload')[0].files[0];
+    const files = document.getElementById("fileToUpload").files[0];
     fd.append('fileToUpload', files);
     fetch('Newpost/Upload/upload_pic', {
             method: 'POST',

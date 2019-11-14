@@ -67,7 +67,6 @@ class GalleryManager
                 FROM `users` JOIN `gallery`
                 on `gallery`.`id_user` = `users`.`id_user`
                 WHERE `gallery`.`id_gallery` = ?', array($id_gallery));
-                // print_r($post_user['id_user']);
             if($post_user['email_prefer'] == 1){
                 EmailSender::send(
                     $post_user['email'], 
