@@ -80,7 +80,7 @@ class ModifyController extends Controller
                 $this->addMessage($ex->getMessage());
             }
         }
-        if ($_POST['comfirm_pwd'])
+        if($_POST['comfirm_pwd'])
         {
             try
             {

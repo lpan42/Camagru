@@ -92,11 +92,10 @@ class UserManager
 
     public function login($login, $password)
     {
-      
         $email = Db::queryOne('
-            SELECT id_user, email, username, password, active, email_prefer
-            FROM users
-            WHERE email = ?;', array($login));
+        SELECT id_user, email, username, password, active, email_prefer
+        FROM users
+        WHERE email = ?;', array($login));
         if($email)//if the login use email
         {
             if (!password_verify($password, $email['password']))
@@ -148,7 +147,7 @@ class UserManager
             if (!$username){
                 throw new UserException('Invalid username or password.');
             }
-            if($username['active'] !== 1){
+            if($username['active'] != 1){
                 throw new UserException('Your account has not been actived yet.');
             }
             else{

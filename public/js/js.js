@@ -13,10 +13,6 @@ for (let i = 0; i < ii.length; i++) {
     });
 }
 
-function change_size(event) {
-    console.log("test");
-}
-
 function render() {
     context_s.clearRect(0, 0, canvas_s.width, canvas_s.height);
     layers.forEach((layer) => {

@@ -16,7 +16,7 @@
 		<div id="nav_bar">
 			<header id="logo"><a href="Gallery">Camagru</a></header>
 
-			<?php if($_SESSION['username']):?>
+			<?php if(isset($_SESSION['username'])):?>
 				<div class="dropdown">
 					<button class="dropbtn" id="newpost">New Post</button>
 					<div class="dropdown-content">
@@ -27,10 +27,10 @@
 			<?php endif?>
 
 			<ul id="nav">
-				<?php if(!$_SESSION['username']):?>
+				<?php if(!isset($_SESSION['username'])):?>
 					<li><a href="Login">Login</a></li>
 					<li><a href="Register">Register</a></li>
-				<?php elseif($_SESSION['username']):?>
+				<?php elseif(isset($_SESSION['username'])):?>
 					<li>Welcome, <?=$_SESSION['username']?></li>
 					<li><a href="Gallery/user_gallery/<?=$_SESSION['id_user']?>">My Gallery</a></li>
 					<li><a href="modify/my_profile">My Account</a></li>
