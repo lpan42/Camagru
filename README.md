@@ -1,5 +1,5 @@
 # 1nd web project in 42.
-##### This project is about creating an Instegram-like website.
+##### This project is about creating an Instgram-like website.
 User can use webcam or upload photo, add stickers and post to public gallery. Others can check, like, and comment.
 ##### P.S. THis is my very own first web project. Very ugly I know.
 For this project, I spent a lot of time dealing with canvas, and multiple sticker layers and move and resize the stickers, all with Vanilla Java Script.
